@@ -33,12 +33,17 @@ comment as well as the table of contents below this comment.
 Once you understand how a table of contents works, remove this comment.
 -->
 #  Table of Contents
-1. [First Exercise](#first-exercise)
-    1. [First Task](#first-task)
+1. [Introduction](#Introduction)
+2. [Lab 01](#Lab-01)
+    1. [Exercise 1](#Lab-01-E1)
+    2. [Exercise 2](#Lab-01-E2)
+3. [Lab 02](#Lab-02)
+    1. [Exercise 1](#Lab-02-E1)
+    2. [Exercise 2](#Lab-02-E2)
 
 * * *
 
-# First Exercise
+# Lab-01
 
 <!--
 EXERCISE TODO #1: Replace "First Exercise" in the heading above with the name
