@@ -37,7 +37,6 @@ Once you understand how a table of contents works, remove this comment.
     1. [First Task](#first-task)
 
 * * *
-* * *
 
 # First Exercise
 
