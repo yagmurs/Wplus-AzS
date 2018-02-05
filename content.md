@@ -41,10 +41,8 @@ Markdown allows for text to be resized by typing 1-6 # (hash or pound) symbols i
 
   > test1
 
-  > t1 >
-  > t2 >
-  > t3 >
-  
+> t1 >
+
   >>> test3
 
 
