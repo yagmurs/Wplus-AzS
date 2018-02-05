@@ -33,11 +33,11 @@ Markdown allows for text to be resized by typing 1-6 # (hash or pound) symbols i
 
 - **Bold**: used to show emphasis. Type two * (asterisk) symbols on each side of the text that is to be bolded.
 
-  > \**Bold text**
+  > **Bold text**
 
 - **Italic**: used to show emphasis or distinction. Type two _ (underline) on each side of text that is to be emphasized.
 
-  > \_Italic text_
+  > _Italic text_
 
 - **~~Strikethrough~~**: used to mark text that should not be included, but should not be removed from the document. Type two ~ (tilde) symbols on each side of text that should show a strikethrough.
 
