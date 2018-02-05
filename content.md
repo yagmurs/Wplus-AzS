@@ -1,230 +1,281 @@
-<!--
-Version 0.1
--->
-<!--
-VERSION TODO #1: Never delete the version comment from your content.md file.
-This specifies the schema version of the document so that it may be parsed
-correctly when it is imported into Lab on Demand. Once you understand the
-importance of the version comment, you may delete this comment (but not the
-version comment before it).
--->
+# Markdown User Guide
 
-<!--
-TOC TODO #1: As you rename First Exercise and First Task below, change their
-names in the table of contents and update their anchors (name in lowercase with
-dashes for spaces). As you add additional exercises and tasks, add them to the
-table of contents as well, observing the following rules:
-1. Always prefix TOC entries by "1.". Markdown will assign an appropriate
-   sequential number to the entry.
-2. When indenting to create sub-entries (which will be numbered with a,b,... or
-   i,ii,...) always indent 4 spaces (GitHub only requires 2, however 4 is the
-   markdown standard).
-3. For hyperlinking to work, TOC entries should be entered in the following
-   format:
-   [Exercise or task name](#exercise-or-task-name-with-dashes-for-spaces)
-4. The TOC is currently not used by the content.md parser. It is simply a nice
-   ways to get fast access to various tasks and exercises. Future versions of
-   the parser may leverage the TOC to define exercise/task positioning as a
-   content.md file is imported.
+Markdown is an easy to use markup language to format text, that offers multiple ways to achieve the same result. Markdown was designed to be easy to learn as well as be easy to read and write. Markdown allows the author to keep their hands on the keyboard and focus on writing content. Markdown supports HTML, and HTML syntax can be used in combination with Markdown.
 
-If you do not want a table of contents for your markdown document, remove this
-comment as well as the table of contents below this comment.
+## Table of Contents 
 
-Once you understand how a table of contents works, remove this comment.
--->
-#  Table of Contents
-1. [First Exercise](#first-exercise)
-    1. [First Task](#first-task)
+1. [Headings](#1-headings)
+2. [Text formatting](#2-text-formatting)
+3. [Link formatting](#3-link-formatting)
+4. [Page formatting](#4-page-formatting)
+5. [Embedded content](#5-embedded-content)
+6. [List formatting](#6-list-formatting)
+7. [Table formatting](#7-table-formatting)
+8. [Special formatting](#8-special-formatting)
 
-* * *
+## 1. Headings
 
-# First Exercise
+Markdown allows for text to be resized by typing 1-6 # (hash or pound) symbols in front of the text that is to be resized, followed by a space. One # renders the largest text size, while six # symbols renders the smallest text size.Typically this is used at the beginning of a paragraph or section in a document, to make the title stand out from the rest of the text. 
+> - # H1 
+> - ## H2    
+> - ### H3    
+> - #### H4
+> - ##### H5
+> - ###### H6
 
-<!--
-EXERCISE TODO #1: Replace "First Exercise" in the heading above with the name
-of your new exercise.
--->
+## 2. Text Formatting
 
-<!--
-EXERCISE TODO #2: Set the IntroductionUri and CompletionUri values in the quoted
-properties below. Both IntroductionUri and CompletionUri may be relative (within
-GitHub) or absolute uris. Remove any values that you don't need, removing the
-entire quote if you don't need any of the values. Then delete this comment.
--->
+- **Indent size**: pressing the tab key will indent 4 spaces.
 
->LODSProperties
->* IntroductionUri = 
->* CompletionUri = 
+- **Single space**: pressing the tab key at the end of a line will single space the next line. Alternatively, pressing the space bar four times will single space the next line. 
 
-## INTRODUCTION MESSAGE
+- **Double space:** leaving no spaces at the end of the line will double space the next line. 
 
-<!--
-EXERCISE TODO #3: Replace this comment with the introduction message for this
-exercise. This message can span multiple paragraphs if necessary.
--->
+- **Bold**: used to show emphasis. Type two * (asterisk) symbols on each side of the text that is to be bolded.
 
-## COMPLETION MESSAGE
+  > \**Bold text**
 
-<!--
-EXERCISE TODO #4: Replace this comment with a completion message for this
-exercise, or delete the COMPLETION MESSAGE heading and this comment if you do
-not need a completion message.
--->
+- **Italic**: used to show emphasis or distinction. Type two _ (underline) on each side of text that is to be emphasized.
 
-<hr>
+  > \_Italic text_
 
-### New Task
+- **~~Strikethrough~~**: used to mark text that should not be included, but should not be removed from the document. Type two ~ (tilde) symbols on each side of text that should show a strikethrough.
 
-<!--
-TASK TODO #1: Replace "New Task" in the heading above with the name of your
-new task and replace this comment with the task instruction message. For the
-best results, try to keep this message short (200 characters or less) and to a
-single paragraph.
--->
+  > \~~Strikethrough text~~ 
 
-#### :warning: ALERT
+- **Escape character**: used to prevent text from being formatted into Markdown. Type a \ (backslash) at the beginning of the text that is to be escaped. 
 
-<!--
-TASK TODO #2: Replace this comment with any warning text that you want
-displayed when a student advances to this task. If you don't have any warning
-text to display for this task, delete this comment and the ALERT heading
-before it.
---> 
+    > \escaped text
 
-#### :bulb: KNOWLEDGE
+- **Bullet**: used to separate and order  items in a list without using numbers
 
-<!--
-TASK TODO #3: Replace this comment with any knowledge text that you want
-displayed when a student clicks on the Knowledge button. Knowledge text must
-not be required for students to complete a task. It is used to provide students
-with additional details, hints, or alternative ways to perform a task. If you
-do not have any knowledge text to display for this task, delete this comment
-and the KNOWLEDGE heading before it.
---> 
+  > `-`
 
-#### :camera: SCREENSHOT
+- **Inline code block**: used to provide a snippet of code that can be copied and pasted. Type a ` (backtick) on each side of the text that is to be displayed in the code block. The backtick is located above the tab key, to the left of the 1 key on the keyboard.
 
-<!--
-TASK TODO #4: In the quoted properties below, set the Uri property to the uri of
-a screenshot you want to link to this task. This can be a relative (within
-GitHub) or absolute uri. Then set the ShowAutomatically property to one of the
-following:
-- No, if you only want the screenshot to appear when the student clicks on the
-camera button;
-- Once, if you want the screenshot to appear automatically the first time the
-student advances to this task; or
-- EveryTime, if you want the screenshot to appear automatically every time the
-student advances or returns to this task.
+  > <code>`code block`</code> 
 
-Once you have set the screenshot properties, delete this entire comment.
+- **Fenced code block**: used to provide a programming language-specific code snippet. Type three ` (backticks) on each side of the text that should be displayed in the fenced code block. This should consume at least 3 lines in the text editor; the first line should display three backticks followed by the programming language name, the second line should display the code snippet, and the last line should only display three backticks. Markdown allows for more than one line to be used to display the code snippet. 
 
-If you do not have a screenshot to associate with this task, delete the
-SCREENSHOT heading above this comment as well as this comment and the quote
-below it.
--->  
->LODSProperties
->* Uri = 
->* ShowAutomatically = No|Once|EveryTime
+  > ~~~Fenced_code_block
+  > ```PowerShell
+  > get-service | stop-service -whatif
+  > ```
+  > ~~~
 
-#### :movie_camera: VIDEO
+## 3. Link formatting
 
-<!--
-TASK TODO #5: In the quoted properties below, set the Uri property to the uri of
-a video you want to link to this task. This can be a relative (withing GitHub)
-or absolute uri. Then set the ShowAutomatically property to one of the
-following:
-- No, if you only want the video to appear when the student clicks on the video
-camera button;
-- Once, if you want the video to appear automatically the first time the
-student advances to this task; or
-- EveryTime, if you want the video to appear automatically every time the
-student advances or returns to this task.
+- **Internal link**: Used to link to a specific section within a document. 
+  > \[text to display](#link-location "optional link title")
 
-If you want the video to appear in a separate dialog, set ShowInDialog to true;
-otherwise, set it to false. 
+- **External link**: Used to link to a page outside of the document.  
 
-Once you have set the video properties, delete this entire comment.
+  > \[text to display](url "optional link title)
 
-If you do not have a video to associate with this task, delete the VIDEO
-heading above this comment as well as this comment and the quote below it.
--->
->LODSProperties
->* Uri = 
->* ShowAutomatically = No|Once|EveryTime
->* ShowInDialog = true|false
+- **Relative link**: used to link to a page in the same directory without the need to display the full URL of the page.
 
-#### :calling: COMMAND TypeText|PowerShell|PowerShellWithUI|Shell|ShellWithUI
+  > \[text to display](../folder/file.htm "optional link title")
 
-<!--
-TASK TODO #6: In the heading above, choose the command type (TypeText,
-PowerShell, PowerShellWithUI, Shell, ShellWithUI) appropriate for this command
-and remove the others. If the command type is PowerShell or PowerShellWithUI,
-leave the "PowerShell" language specifier that is next to the code block
-opening enclosure; otherwise, remove the language specifier and simply leave
-the code block opening enclosure with nothing after it. Then, enter the
-appropriate command text in the code block below.
+- **Reference link**: used to provide a link that will be referenced multiple times. The link can be referenced by typing the text value between the [ ] (square brackets). It is not necessary to include the full URL, as long as the text value in both sets of brackets is the same.   
 
-Once you have set up the command type and code block properly, delete this
-entire comment.
+  - **_Text lookup_**: 
+    > \[Reference link text value]
+    > \[Reference link text value]: URL "Optional link title"
+  - **_Label lookup_**:
+    > \[Reference link][Name of URL]
+    > \[Name of URL]: URL "Optional link title"
+  - **_Footnote style_**:
+    > \[Reference link][1]
+    > \[1]: URL "Optional link title"
 
-If you do not have a command to associate with this task, delete the COMMAND
-heading above this comment as well as this comment and the code block below it.
--->
-```PowerShell
-# Replace this line with the PowerShell command, shell command, or text to type.
-# If this command is anything other than PowerShell or PowerShellWithUI, remove
-# the "PowerShell" label at the beginning of this code block.
+## 4. Page formatting
+
+- **Page break**: Used to separate content into pages. Separating into pages creates a next button that the student must click to navigate to the next page. This is useful for displaying small sections of instruction to the student at a time, rather than all instructions on the same page within the lab. Type three = (equals) symbols on the line where the current page should end. The new page will begin on the line following the three = symbols.
+
+  > \===
+
+- **Horizontal Line**: Used to separate content on the same page. Type three --- (dash or hyphen) on the line where the horizontal line should appear. 
+
+  > \---
+
+- **Block quote:** Used to quote information from other sources. Block quote text appears indented from other content in the document. Type a > (greater-than sign) before text that should appear in the block quote. Most Markdown syntax will render inside of block quotes.
+
+  > \> text here
+  >
+  > \> additional text 
+ 
+## 5. Embedded content
+
+- **Image**: Used to embed an image inline with other content. When images are clicked, they will open in a new window and display at the images full resolution.
+
+  > \!IMAGE[text to display]\(url)
+
+- **Video:** Used to embed an image inline with other content. The syntax format should look the same as an image, except the video should begin with a ! (explanation mark), followed by the word VIDEO (all caps).
+
+  > \!VIDEO[text to display]\(url)
+
+- **Image with link:** Used to embed an image that can be clicked to navigate to a specific URL (internal or external). 
+
+  > \[![text to display]url or filepath "Optional image title")]url "Optional link title")
+
+- **Portal Link:** used to launch a hyperlink. In the Cloud Client, this will open the hyperlink in the left window. In the traditional virtualization client (vm-based labs), this will open the hyperlink in a new local browser window.
+
+  > `<[text to display](URL)`
+
+- **Image Link:** used to display a link with a camera icon, to suggest that the hyperlink opens an image
+
+  > `IMAGE[text to display](URL to image)`
+
+- **Video Link:** used to display a link with a videocamera icon, to suggest that the hyperlink opens a video
+
+  > `VIDEO[text to display](URL to video)`
+
+## 6. List formatting
+
+- **Unordered list:** Used to list items in no particular order, separated by bullets rather than numbers. Type a - (dash or hyphen) followed by a space and then the text to be listed. Pressing enter at the end of the text will start the next line with a bullet. 
+
+- **Ordered list:** Used to list items in a particular order, separated by numbers rather than bullets. Type the number 1, followed by a space and then the text to be listed. Pressing enter at the end of the text will start the next line with number 2.
+
+- Both Unordered and Ordered lists can contain Task Checkboxes for the student to check off steps as completed. Both list types can be combined in the same list. Task Checkboxes are used track and report lab progress to LOD and TMS, as well as a visual marker for students. Lab progress is calculated by the percentage of Task Checkboxes that are checked in the lab instructions.
+
+### Unordered list **without** Task Checkboxes: 
+ 
+```
+- Item 1
+    - Item 1.1
+        - Item 1.1.1
+        - Item 1.1.2
+    - Item 1.2
+- Item 2
 ```
 
-#### :computer: ACTIONS
+### Ordered list **without** Task Checkboxes:
 
-<!--
-TASK TODO #7: In the quoted properties below, set the VM property to one of the
-following:
-- NoAction, if you don't want to change the active VM in the lab;
-- VNName, if you want to select a different VM in the lab as the active VM
-(Note that you must enter the name of the VM in place of the "VMName" string in
-order for this to work).
+```
+1. Item 1
+    1. Item 1.1
+        1. Item 1.1.1
+        1. Item 1.1.2
+    1. Item 1.2
+1. Item 2
+```
 
-Then set the FloppyDrive property to one of the following:
-- NoAction, if you don't want to change the state of the virtual floppy drive
-in the active VM;
-- FloppyName, if you want to insert a different floppy disk into the virtual
-floppy drive in the active VM (Note that you must enter the name of the floppy
-disk in place of the "FloppyName" string in order for this to work);
-- Eject, if you want to eject the floppy disk in the virtual floppy drive in
-the active VM.
+### Unordered list **with** Task Checkboxes:
 
-Then set the DvdDrive property to one of the following:
-- NoAction, if you don't want to change the state of the virtual DVD drive
-in the active VM;
-- DvdName, if you want to insert a different DVD disk into the virtual DVD
-drive in the active VM (Note that you must enter the name of the DVD disk
-in place of the "DvdName" string in order for this to work);
-- Eject, if you want to eject the DVD disk in the virtual DVD drive in the
-active VM.
+```
+- [] Item 1
+    - [] Item 1.1
+        - [] Item 1.1.1
+        - [] Item 1.1.2
+    - [] Item 1.2
+- [] Item 2
+```
 
-Once you have configured the actions for the task, delete this entire comment.
+### Ordered list **with** Task Checkboxes:
 
-If you do not want to take any of these actions with this task, delete the
-ACTIONS heading above this comment as well as this comment and the quote below
-it.
--->
->LODSProperties
->* VM = NoAction|VMName
->* FloppyDrive = NoAction|FloppyName|Eject
->* DvdDrive = NoAction|DvdName|Eject
+```
+1. [] Item 1
+    1. [] Item 1.1
+        1. [] Item 1.1.1
+        1. [] Item 1.1.2
+    1. [] Item 1.2
+1. [] Item 2
+```
 
-<!--
-NEW TASK TODO #1: If you want to add another task, copy and paste the contents of
-the task template you want to use over this comment. You can find the task
-templates here:
-https://github.com/LearnOnDemandSystems/idl-md/blob/master/templates
--->
+## 7. Table formatting
+- Tables can be aligned left, right or center by placing a : (colon) on the head row of the table. Placing a colon on the left side, right side or both sides of the dashes in the header row, will align the text in the table accordingly. 
 
-<!--
-NEW EXERCISE TODO #1: If you want to add another exercise, copy and paste the
-contents of the exercise template you want to use over this comment. You can find
-the exercise templates here:
-https://github.com/LearnOnDemandSystems/idl-md/blob/master/templates
--->
+**Left-aligned text**
+
+```
+| column 1 | column 2 |
+|:---------|:---------|
+| data 1   | data 2   |
+| data 3   | data 4   |
+```
+
+**Right-aligned text**
+```
+| column 1 | column 2 |
+|---------:|---------:|
+| data 1   | data 2   |
+| data 3   | data 4   |
+```
+
+**Center-aligned text**
+```
+| column 1 | column 2 |
+|:--------:|:--------:|
+| data 1   | data 2   |
+| data 3   | data 4   |
+```
+
+## 8. Special formatting 
+
+- **Knowledge Block:** Used to provide additional information, to help students better understand lab steps or lab content. Knowledge blocks are limited to only show 4 lines of the lab content. After 4 lines, a _more_ link will be shown, allowing the student to expand the Knowledge Block and review additional information.
+
+  > \> [!KNOWLEDGE] knowledge text here.
+
+- **Alert:** Used to draw attention to important issues, such as showing additional information or steps that the student may need complete to avoid other issues. 
+
+  > \> [!ALERT] alert text here.
+
+- **Note:** used to provide additional information, similar to a Knowledge Block, with the only difference being that Notes do not collapse and show a _more_ link to expand the section. 
+
+  > [!NOTE]
+  
+- **Dialog:** Used to open a dialog popup, to display additonal information. This can be useful to make additional information available to the student.
+
+  >^[Text to display in lab  instructions][Reference Link]
+  
+  >\>[Reference Link]:
+  
+  >\>This appears in the Dialog
+
+- **Commands:** Used to target the Portal window to input commands. Clicking the text in the lab instructinos will input the command into the item in focus, on the Portal window. Commands can be a single line (shown below) or multi-line. Define the command as a reference link and then use that reference link as the command in the below syntax. 
+
+  >~~~
+  >@[Text to display](`command`)
+  >~~~
+
+- **Include:**  used to input text from a GitHub raw link. This is useful to use to pull in content hosted on GitHub. Navigate to the GitHub page containing the content to be used, click the Raw button, then copy the URL of that page and include it in the below syntax. 
+
+  **Note**: GitHub hosted content can be changed by the repo maintainer of the content and will change the instructions displayed in the lab using the _Include_ syntax. 
+
+  >  `[!INCLUDE [label](url)]`
+
+- **Copyable Text:** used to make text copy to the local clipboard when the student clicks the text. Type two + (plus) symbols on each side of the text that should be made copyable. 
+
+  > \++copyable text++
+
+
+- **Type Text:** used to target the Portal window to input text. Clicking the text in the lab instructions will input text into the item in focus, on the Portal Window Type three + (plus) symbols on each side of the text that should be made into Type Text. 
+
+  > \+++Type Text+++
+  
+- **Embed YouTube video:** used to embed a YouTube video inline with the lab instructions. URLs from YouTube.com automatically embed. Videos from any other URL will not embed.
+
+  > `!VIDEO[text to display](url)` 
+
+
+
+- **Replacement Token:** used to replace text in lab instructions with a variable that is unknown at the time of authoring the lab instructions. These variables may not be generated or created until the lab is launched by the student. These can include usernames, user first name, user last name, running lab instance ID number, etc. 
+  > | Replacement token           |                                          |
+  > | --------------------------- | ---------------------------------------- |
+  > | @lab.LabInstanceId          | The unique ID of the running lab instance. |
+  > | @lab.GlobalLabInstanceId    | The globally unique ID of the running lab instance. |
+  > | @lab.LabProfileId           | The unique ID of the lab profile.        |
+  > | @lab.UserId                 | The unique ID of user running the lab.   |
+  > | @lab.UserFirstName          | The first name of the user running the lab. |
+  > | @lab.UserLastName           | The last name of the user running the lab. |
+  > | @lab.UserEmail              | The e-mail address of the user running the lab. |
+  > | @lab.UserExternalId         | The external ID of the user running the lab (if launched via API). |
+  > | @lab.Tag                    | The tag associated with the lab instance (if specified when launched via API). |
+  > | @lab.CloudPortalLink        | A link to the cloud portal.              |
+  > | @lab.CloudPortalUrl         | The cloud portal URL (rendered as text, not a link). |
+  > | @lab.CloudPortalSignInLink  | A cloud portal sign-in link.             |
+  > | @lab.CloudPortalSignInUrl   | The cloud portal sign-in URL (rendered as text, not a link). |
+  > | @lab.CloudPortalSignOutLink | A cloud portal sign-out link.            |
+  > | @lab.CloudPortalSignOutUrl  | The cloud portal sign-out URL (rendered as text, not a link). |
+
+---
