@@ -44,7 +44,7 @@ Markdown allows for text to be resized by typing 1-6 # (hash or pound) symbols i
 > t1 >
 
   >>> test3
-
+  >>> test4
 
 - **~~Strikethrough~~**: used to mark text that should not be included, but should not be removed from the document. Type two ~ (tilde) symbols on each side of text that should show a strikethrough.
 
