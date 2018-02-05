@@ -33,18 +33,12 @@ comment as well as the table of contents below this comment.
 Once you understand how a table of contents works, remove this comment.
 -->
 #  Table of Contents
-1. [Introduction](#Introduction)
-2. [Lab 01](#lab-01)
-    1. [Exercise 1](#lab-01-e1)
-    2. [Exercise 2](#lab-01-e2)
-    3. [Exercise 3](#lab-01-e3)
-3. [Lab 02](#Lab-02)
-    1. [Exercise 1](#lab-02-e1)
-    2. [Exercise 2](#lab-02-e2)
+1. [First Exercise](#first-exercise)
+    1. [First Task](#first-task)
 
 * * *
 
-# Lab 01
+# First Exercise
 
 <!--
 EXERCISE TODO #1: Replace "First Exercise" in the heading above with the name
@@ -79,7 +73,7 @@ not need a completion message.
 
 <hr>
 
-### lab 01 e1
+### New Task
 
 <!--
 TASK TODO #1: Replace "New Task" in the heading above with the name of your
