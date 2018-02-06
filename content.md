@@ -214,7 +214,6 @@ it.
 >* VM = NoAction|VMName
 >* FloppyDrive = NoAction|FloppyName|Eject
 >* DvdDrive = NoAction|DvdName|Eject
->* DvdDrive = NoAction|DvdName|Eject
 
 <!--
 NEW TASK TODO #1: If you want to add another task, copy and paste the contents of
