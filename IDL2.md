@@ -224,7 +224,7 @@ Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -
 ```
 - [] Log on to Azure Stack Tenant Portal 
 - [] In the Azure Portal click on Resource Groups 
-- [] Select ***rg01**
+- [] Select **rg01**
 - [] Select the resource with Virtual Machine Scale Set type from the list of resources 
 - [] Click on **Instances** 
 - [] You should see 1 instance running and another one being Created. 
