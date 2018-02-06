@@ -211,6 +211,11 @@ $TenantID = Get-AzsDirectoryTenantId -AADTenantName $AadTenant -EnvironmentName 
 # Sign in to your environment 
 Login-AzureRmAccount -EnvironmentName "AzureStackTenant" -TenantId $TenantID 
 ```
+```PowerShell
+Get-Item 
+```
+
+
 When asked for credentials logon using T1U1@<AAD Tenant>.onmicrosoft.com account
 ###Exercise 4 Manually scale up VMs using PowerShell 
 - [] Using the same PowerShell session created in Exercise 3 
