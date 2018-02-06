@@ -45,6 +45,7 @@ EXERCISE TODO #1: Replace "First Exercise" in the heading above with the name
 of your new exercise.
 -->
 
+
 <!--
 EXERCISE TODO #2: Set the IntroductionUri and CompletionUri values in the quoted
 properties below. Both IntroductionUri and CompletionUri may be relative (within
