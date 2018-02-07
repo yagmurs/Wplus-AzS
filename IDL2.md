@@ -1,359 +1,191 @@
 #WorkshopPLUS – Architecting Hybrid Cloud Solutions – Azure Stack
 #Introduction
-Blah blah
-blah
+> [!ALERT] Introduction Information will be completed
 
 ===
-#Lab 01
-> [!KNOWLEDGE] knowledge text here
+#Lab 01 - Deploy Azure Stack using Azure Active Directory
 
-*@lab.UserEmail*
+##^[**Objectives and Summary**][lab01-os]
 
-*@lab.VirtualMachine(55059).Username*
+> [lab01-os]:
+> ###Introduction
+>> This Lab covers configuring Azure Active Directory tenant to be used for ASDK installation and Installing Azure Stack Development Kit on an Azure VM, registering Azure Stack Installation to Azure on **connected** mode. 
+>
+> ###Objectives
+> In this lab, you will:
+> - Configure Azure Active Directory tenant
+> - Deploy Azure VM to host ASDK
+> - Deploy ASDK on Azure VM
+> - First logon to Azure Stack Environment
+> - Setup Management Environment
+> - Register Azure Stack to Azure
+> ###Prerequisites
+>>> [!ALERT]Azure Pass account has to be registered and ready to use.
+>
+> ###Variables
+>>
+>
+> ###Estimated time to complete this lab
+>> **6 Hours**
+>
+> ###Scenario
+>> Deploy Azure Stack Deployment Kit on an Azure VM and register to Azure on **connected** mode. 
 
-*@lab.VirtualMachine(55059).Password*
+##Exercises
+###Exercise #1 - Deploy Azure Stack host using ARM Template
+- [] Logon [Azure Portal][azure-portal]
+- [] [*Register Azure Pass*][azure-pass]
+- [] On main menu click **More services** > **Azure Active Directory**
+- [] On Quick tasks click **Add a user**.
 
-^[**Objectives and Summary**][OS1]
+Specify the following settings.
+> - Name: **@lab.UserFirstName**
+> - User name: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+> - Profile: **Not configured**
+> - Directory Role: **Global administrator**
+> - Password: check **Show Password**
+> - **Copy** the password to **clipboard**
 
-> [OS1]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
+- [] Click **Create**
+
+> [!KNOWLEDGE] Tenant user now created, needs to be the **Owner** for the Azure subscription.
+
+- [] On main menu click **More services** > **Subscriptions**
+- [] On the subscriptions blade click on your **Azure Pass** Subscription
+- [] On the Azure Pass blade click **Access control (IAM)** > **+Add**
+
+On the Add permissions blade, Specify the following settings.
+> - Role: **Owner**
+> - Assign Access to: **Azure AD user,group or application**
+> - Select: **@lab.UserFirstName**
+
+- [] User should be listed. Click on user to add user to Selected members
+- [] Click **Save**
+
+- [] Sign out from current session.
+- [] Logon [Azure Portal][azure-portal] with **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com** and use the temporary password previously saved.
+- [] You will be prompted to change the password.
+- [] Enter previous password and **new password** twice. Click **OK**
+
+    > [!ALERT] This will make sure you have changed the temporary password
+
+> [!KNOWLEDGE] We now have the necessary Azure AD tenant directory to use on Azure Stack installation.
+
+> [!KNOWLEDGE] Until this point we will start deploying Azure VM to host Azure Stack Development Kit.
+
+- [] Open up new browser and go to https://github.com/yagmurs/AzureStack-VM-PoC
+- [] Click **Deploy to Azure** button to deploy Azure Stack host template to Azure.
+- [] Browser will be redirected to your <\tenant name>.onmicrosoft.com portal with ARM template settings to be completed. 
+- [] On "Customized template" blade > "Resource Group"
+- [] Click **Create New**
+
+On the Custom deployment blade, Specify the following settings.
+> - Virtual Machine Name: **AzS-Host1**
+> - Public DNS Name: **Any name that does not conflicts**
+> - Region: **<\Any region that is closer to your location>**
+> - Resource Group: **AzureStackPremierWorkshop**
+> - Admin Password: **<\Local Administrator password to be used to logon to Azure VM>**
+
+- [] Check TERMS AND CONDITIONS and click on **Purchase**.
+
+> [!NOTE] VM installation takes about 10 to 20 minutes depends on the region and load.
+
+[Reference Document][lab01-e1-rl]
+
+- [] *Exercise #2*
+
+[Reference Document][lab01-e2-rl]
+
+- [] *Exercise #3*
+
+[Reference Document][lab01-e3-rl]
+
+- [] *Exercise #4*
+
+[Reference Document][lab01-e4-rl]
+
+- [] *Exercise #5*
+
+[Reference Document][lab01-e5-rl]
+
+- [] *Exercise #6*
+
+[Reference Document][lab01-e6-rl]
+
+- [] *Exercise #7*
+
+[Reference Document][lab01-e7-rl]
+
 
 ===
-#Lab 02
-> [!ALERT] alert text here.
+## References
+#### Lab References
+[lab01-e1-rl]:https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-deploy
+[lab01-e2-rl]:https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-deploy
 
-^[**Objectives and Summary**][OS2]
-
-> [OS2]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 03
-
-^[**Objectives and Summary**][OS3]
-
-> [OS3]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 04
-
-^[**Objectives and Summary**][OS4]
-
-> [OS4]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 05
-
-^[**Objectives and Summary**][OS5]
-
-> [OS5]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 06
-^[**Objectives and Summary**][OS6]
-
-> [OS6]:
-##Introduction
-This Lab covers enabling, configuring, and manually scaling Virtual Machine scale sets to be used in Azure Stack.
-##Objectives  
-In this lab, you will: 
-Enable Virtual Machine scale sets feature, 
-Connect to Azure Stack as a tenant, 
-Deploy a Virtual Machine scale set, 
-Manually scale up Virtual Machine scale set 
-##Prerequisites   
-You must complete Lab 07: Plans & Offers before you can start this lab. 
-Environment 
-Admin Portal Address: https://adminportal.local.azurestack.external 
-Tenant Portal Address: https://portal.local.azurestack.external 
-Cloud Operator Account: **Tenant Alias**@**AAD Tenant**.onmicrosoft.com 
-Tenant User Account: T1U1@**AAD Tenant**.onmicrosoft.com 
-##Variables 
-Change **AAD Tenant** with your Tenant ID.  
-Change **Tenant Alias** with your Tenant Administrator alias.
-**Password**: Virtual Machine Local Administrator Password
-**Subscription**: Subscription for the Azure Stack tenant user account 
-##Estimated time to complete this lab  
-60 minutes 
-##Scenario  
-Enable Virtual Machine Scale Set feature in Azure Stack using PowerShell via Cloud Admin account. Afterwards logon to your tenant and create a virtual machine scale set and then manually scale it. 
-
-##Exercices
-####Exercise 1: Enable Virtual Machine Scale Sets 
-- [] Open PowerShell 
-- [] Run below command to connect to Azure Stack as Cloud Admin and enable VMSS. (replace the fields between <> with required information)
-```Powershell
-#Variables 
-$defaultLocalPath = "C:\AzureStackOnAzureVM" 
-$location = "local" 
- 
-$AadAdmin = "<Tenant Alias>@<AAD Tenant>.onmicrosoft.com" 
-$AadTenant = "<AAD Tenant>.onmicrosoft.com" 
-  
-# Create Azure AD credential object 
-$AadAdminPass = ConvertTo-SecureString "<Azure AD Admin Password>" -AsPlainText -Force 
-$AadAdminCred = New-Object System.Management.Automation.PSCredential ("$AadAdmin", $AadAdminPass) 
-  
-cd\ 
-cd $defaultLocalPath 
-cd AzureStack-Tools-master 
- 
-Import-Module .\ComputeAdmin\AzureStack.ComputeAdmin.psm1 
-Import-Module .\Connect\AzureStack.Connect.psm1 
- 
-$ArmEndpoint = "https://adminmanagement.local.azurestack.external" 
-$KeyvaultDnsSuffix = “adminvault.local.azurestack.external” 
-  
-# Register an AzureRM environment that targets your Azure Stack instance 
-Add-AzureRMEnvironment -Name "AzureStackAdmin" -ArmEndpoint $ArmEndpoint 
- 
-Set-AzureRmEnvironment -Name "AzureStackAdmin" -GraphAudience $GraphAudience  
- 
-# Get the Active Directory tenantId that is used to deploy Azure Stack 
-$TenantID = Get-AzsDirectoryTenantId -AADTenantName $AadTenant -EnvironmentName "AzureStackAdmin" 
- 
-# Sign in to your environment 
-Login-AzureRmAccount -EnvironmentName "AzureStackAdmin" -TenantId $TenantID -Credential $AadAdminCred 
- 
-Add-AzsVMSSGalleryItem -Location $location 
-```
-This will enable Virtual Machine scale sets on your Azure Stack deployment. 
-###Exercise 2: Deploy a virtual machine scale sets 
-- [] Log on to Azure Stack Tenant Portal using T1U1@<AAD Tenant>.onmicrosoft.com 
-- [] Click New > Compute > Virtual Machine scale set
-- [] Step 1: Fill in the form 
-    - Virtual machine scale set name: rg01vmss 
-    - OS type: select Windows 
-    - User name: localadm 
-    - Password: <Password> 
-    - Subscription: <Subscription> 
-    - Resource group: select Create new 
-    - Resource group name: rg01 
-    - Location: local 
-- [] Click **OK** 
-- [] Step 2: Fill in the form
-    - Click on Public IP address 
-    - Change name to: rg01ip01 
-    - Make sure Dynamic is selected 
-- [] Click **OK** 
-    - Domain name label: testapp01 
-    - Operating system disk image: 2016-Datacenter 
-    - Instance count: 1 
-    - Scale set virtual machine size: 1x Standard D1 
-- [] Click **OK** 
-- [] Step 3: Summary
-
-    > [!NOTE] Make sure all information is correct
-
-    > [!ALERT] Make sure all information is correct
-
-- [] Click **OK** 
-In the Azure Portal click on Resource Groups 
-- [] Select **rg01**
-- [] Click on **Deployments**
-    - Wait for deployment to finish, this will take approximately 15 minutes. 
-- [] Validate that Windows machine is deployed, to validate the VM you can open a remote desktop session. Because of the default load balancer rules port 50000 on the Load Balancer will be mapped to the first VM in the scale set on port 3389. 
-- [] Open **Start Menu**
-- [] Search for Remote Desktop Connection and connect to testapp01.local.cloudapp.azurestack.external:50000
-###Exercise 3 Configure PowerShell Environment for Tenant 
-- [] Open a new PowerShell session
-```Powershell
-# Variables 
-$defaultLocalPath = "C:\AzureStackOnAzureVM" 
-$location = "local" 
- 
-cd\ 
-cd $defaultLocalPath 
-cd AzureStack-Tools-master 
- 
-Import-Module .\ComputeAdmin\AzureStack.ComputeAdmin.psm1 
-Import-Module .\Connect\AzureStack.Connect.psm1 
-$AadTenant = <AAD Tenant>.onmicrosoft.com 
-$ArmEndpoint =  "https://management.local.azurestack.external" 
-$KeyvaultDnsSuffix = “vault.local.azurestack.external” 
- 
-# Register an AzureRM environment that targets your Azure Stack instance 
-Add-AzureRMEnvironment -Name "AzureStackTenant" -ArmEndpoint $ArmEndpoint 
- 
-Set-AzureRmEnvironment -Name "AzureStackTenant" -GraphAudience $GraphAudience  
- 
-# Get the Active Directory tenantId that is used to deploy Azure Stack 
-$TenantID = Get-AzsDirectoryTenantId -AADTenantName $AadTenant -EnvironmentName "AzureStackTenant" 
- 
-# Sign in to your environment 
-Login-AzureRmAccount -EnvironmentName "AzureStackTenant" -TenantId $TenantID 
-```
-```PowerShell
-Get-Item 
-```
+#### variables
 
 
-When asked for credentials logon using T1U1@<AAD Tenant>.onmicrosoft.com account
-###Exercise 4 Manually scale up VMs using PowerShell 
-- [] Using the same PowerShell session created in Exercise 3 
-- [] Run below commands
-```Powershell
-$vmss = Get-AzureRmVmss -ResourceGroupName rg01 
-$vmss = Get-AzureRmVmss -ResourceGroupName rg01 -VMScaleSetName $vmss[0].Name 
- 
-$vmss.sku.Capacity = 2 
-Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -VirtualMachineScaleSet $vmss 
-```
-- [] Log on to Azure Stack Tenant Portal 
-- [] In the Azure Portal click on Resource Groups 
-- [] Select **rg01**
-- [] Select the resource with Virtual Machine Scale Set type from the list of resources 
-- [] Click on **Instances** 
-- [] You should see 1 instance running and another one being Created. 
-- [] Wait for deployment to finish, this will take approximately 15 minutes. 
-- [] Validate that Windows machine is deployed, to validate the VM you can open a remote desktop session. Because of the default load balancer rules port 50001 on the Load Balancer will be mapped to the second VM in the scale set on port 3389. 
-- [] Open Start Menu 
-- [] Search for Remote Desktop Connection and connect to testapp01.local.cloudapp.azurestack.external:50001 
+#### Images
 
-===
-#Lab 07
+#### Links
+[Azure Portal][azure-portal]
 
-^[**Objectives and Summary**][OS7]
+[Azure Stack Admin Portal][azurestack-adminportal]
 
-> [OS7]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
+[Azure Stack Tenant Portal][azurestack-tenantportal]
 
-===
-#Lab 08
+[Register Azure Pass][azure-pass]
 
-^[**Objectives and Summary**][OS8]
-
-> [OS8]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 09
-
-^[**Objectives and Summary**][OS9]
-
-> [OS9]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 10
-
-^[**Objectives and Summary**][OS10]
-
-> [OS10]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 11
-
-^[**Objectives and Summary**][OS11]
-
-> [OS11]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 12
-
-^[**Objectives and Summary**][OS12]
-
-> [OS12]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 13
-
-^[**Objectives and Summary**][OS13]
-
-> [OS13]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
-
-===
-#Lab 14
-
-^[**Objectives and Summary**][OS14]
-
-> [OS14]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
+[azure-portal]:https://portal.azure.com "https://portal.azure.com/"
+[azurestack-adminportal]:https://adminportal.local.azurestack.external "https://adminportal.local.azurestack.external"
+[azurestack-tenantportal]:https://portal.local.azurestack.external "https://portal.local.azurestack.external"
+[azure-pass]:https://www.microsoftazurepass.com/SubmitPromoCode "https://www.microsoftazurepass.com/"
 
 ===
 
-#Lab x
+#Lab xx
 
-^[**Objectives and Summary**][OSx]
+##^[**Objectives and Summary**][labxx-os]
 
-> [OSx]:
-##Objectives
-##Exercices
-##Prerequisites   
-##Variables 
-##Estimated time to complete this lab  
-##Scenario
+> [labxx-os]:
+###Introduction
+###Objectives
+###Prerequisites
+###Variables
+###Estimated time to complete this lab
+###Scenario
+
+##Exercises
+###Exercise #1
+
+[Reference Document][labxx-e1-rl]
+
+###Exercise #2
+
+[Reference Document][labxx-e2-rl]
+
+###Exercise #3
+
+[Reference Document][labxx-e3-rl]
+
+###Exercise #4
+
+[Reference Document][labxx-e4-rl]
+
+###Exercise #5
+
+[Reference Document][labxx-e5-rl]
+
+###Exercise #6
+
+[Reference Document][labxx-e6-rl]
+
+###Exercise #7
+
+[Reference Document][labxx-e7-rl]
+
+===
+
 
 ===
