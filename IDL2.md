@@ -29,7 +29,7 @@
 >> **6 Hours**
 >
 > ###Scenario
->> Deploy Azure Stack Deployment Kit on an Azure VM and register to Azure on **connected** mode. 
+>> Deploy Azure Stack Development Kit on an Azure VM and register to Azure on **connected** mode. 
 
 ##Exercises
 ###Exercise #1 - Deploy Azure Stack host using ARM Template
