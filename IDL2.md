@@ -128,6 +128,7 @@ On the Custom deployment blade, Specify the following settings.
 
 #### Images
 
+
 #### Links
 [Azure Portal][azure-portal]
 
