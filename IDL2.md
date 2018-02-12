@@ -20,7 +20,7 @@
 > - Setup Management Environment
 > - Register Azure Stack to Azure
 > ###Prerequisites
->>> [!ALERT] Azure Pass account has to be registered and ready to use
+>>> [!ALERT] There are no prerequisites for this lab
 >
 > ###Variables
 >> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
@@ -109,7 +109,7 @@ On Custom deployment blade, Specify the following settings
 
 - [] On Main menu click **More services** > **Virtual Machines**
 
-- [] On Virtual Machines blade > right click on created VM ***AzS-Host1** > click **Connect**
+- [] On Virtual Machines blade > right click on created VM **AzS-Host1** > click **Connect**
 
 - [] Logon to host VM with RDP client using **Administrator** user with **@lab.VirtualMachine(55267).Password**
 
@@ -341,7 +341,7 @@ $TenantID = Get-AzsDirectoryTenantId `
 Login-AzureRmAccount ` 
   -EnvironmentName "AzureStackAdmin" ` 
   -TenantId $TenantID ` 
-  -Credential $AadAdminCre
+  -Credential $AadAdminCred
 ```
 ##Test Azure Stack PowerShell
 
@@ -488,22 +488,489 @@ The output will be similar to as follows:
 
 [Reference Document][lab02-e1-rl2]
 
+#Lab 03 - Configuring Delegation using the Azure Stack Admin Portal
+
+##^[**Objectives and Summary**][lab03-os]
+
+> [lab03-os]:
+> ###Introduction
+>> After completing this lab, students will be able to: Implement Azure Stack offer delegation by using the Azure Stack portals
+>
+> ###Objectives
+> In this lab, you will:
+> - Create a plan 
+> - Create an offer
+> - Subscribe to an offer
+> - Delegate offers in Azure Stack
+>
+> ###Prerequisites
+>>> [!ALERT] In order to successfuly complete this lab **Lab 01 & Lab 02** must be completed.
+>
+> ###Variables
+>> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>>
+>> Following scheme stands for password you have assigned to **Administrator**. Same password is used for *AZURESTACK\AzureStackAdmin*, and *AZURESTACK\CloudAdmin* which will be used on Azure Stack development kit. These are AZURESTACK domain identities that may be used to logon Azure VM.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>
+> ###Estimated time to complete this lab
+>> **60 minutes**
+>
+> ###Scenario
+>> Implement Azure Stack offer delegation by using the Azure Stack portals
+
+===
+#Lab 03 - Exercise #1 - Prepare for the lab
+
+> In this exercise, you will create Azure Active Directory user accounts that you will be using in this lab:
+> - Create a delegated admin user account (as a cloud operator)
+> - Create a tenant user account-tenantuser (as a cloud operator)
+
+##Task 1: Create a delegated admin user account - delegatedprovider (as a cloud operator)
+
+> In this task, you will:
+> - Create a delegated admin user account (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Portal][azure-portal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the Azure portal, click **More services**
+- [] On New blade, search for **Azure Active Directory**, click **Azure Active Directory**
+- [] On **Azure Active Directory** blade, under manage, click **Users and groups**
+- [] On the **Users and groups** blade, under manage, click **All users**
+- [] On the **Users and groups – All Users**, click **+New user**
+- [] In the **User** blade, specify the following settings
+   
+    > - Name: **DelegatedProvider**
+    > - User name: **delegatedprovider@<\tenant_name>.onmicrosoft.com**
+    > - Profile: **Not configured**
+    > - Properties: **Default**
+    > - Groups: **0 groups selected**
+    > - Directory role: **User**
+
+- [] Click **Show Password** check box, note the password
+- [] Click **Create** to create the user account.
+
+##Task 2: Create a tenant user account - tenantuser (as a cloud operator)
+
+> In this task, you will:
+> - Create a tenant user account-tenantuser (as a cloud operator)
+
+
+- [] While logged on Azure Stack host VM with RDP client using following information;
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Portal][azure-portal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the Azure portal, click **More services**
+- [] On New blade, search for **Azure Active Directory**, click **Azure Active Directory**
+- [] On **Azure Active Directory** blade, under manage, click **Users and groups**
+- [] On the **Users and groups** blade, under manage, click **All users**
+- [] On the **Users and groups – All Users**, click **+New user**
+- [] In the **User** blade, specify the following settings
+   
+    > - Name: **TenantUser**
+    > - User name: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Profile: **Not configured**
+    > - Properties: **Default**
+    > - Groups: **0 groups selected**
+    > - Directory role: **User**
+
+- [] Click **Show Password** check box, note the password
+- [] Click **Create** to create the user account.
+
+> **Result:**
+> After completing this exercise, you have created the Active Directory accounts you will use in this lab
+
+#Lab 03 - Exercise #2 - Designate the delegated provider (as a cloud operator)
+
+> In this exercise, you will act as a cloud operator and create a plan consisting of the Subscription service and the corresponding offer.
+> Next, you will create a subscription containing the new offer and designate the delegated provider as its subscriber:
+> - Create a plan consisting of the Subscription service (as a cloud operator)
+> - Create an offer based on the plan (as a cloud operator)
+> - Create a new subscription containing the offer (as a delegated provider)
+
+##Task 1: Create a plan consisting of the Subscription service (as a cloud operator)
+
+> In this task, you will:
+> - Create a plan consisting of the Subscription service (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] On the **New** blade, click **Offers + Plans**
+- [] On the **Offers + Plans** blade, click **Plan**
+- [] On the **New plan** blade, specify the following information:
+
+    > - Display name: **cotodp-subscription-plan**
+    > - Resource name: **cotodp-subscription-plan**
+    > - Resource group: click **Create new** and type **dp-subscription-rg**
+
+- [] Click **Services**
+- [] On the **Services** blade, click **Microsoft.Subscriptions** and click **Select**
+- [] Click **Quotas**
+- [] On the **Quotas** blade, click **Microsoft.Subscriptions**
+- [] On the **Quotas** blade, click **delegatedProviderQuota**
+- [] Click **OK**
+- [] Click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+##Task 2: Create an offer based on the plan (as a cloud operator)
+
+> In this task, you will:
+> - Create an offer based on the plan (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **New**
+- [] On the **New** blade, click **Offers + Plans**
+- [] On the **Offers + Plans** blade, click **Offer**
+- [] On the **New offer** blade, specify the following information:
+
+    > - Display name: **Cotodp-subscription-offer**
+    > - Resource name: **cotodp-subscription-offer**
+    > - Provider subscription: **Default Provider Subscription**
+    > - Resource group: **CO-subscription-rg**
+
+- [] Click **Base plans**
+- [] On the **Plan** blade, click **cotodp-subscription-plan**
+- [] Click **Select**.
+- [] Leave **Add-on plans** set to **None** and click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+##Task 3: Create a new subscription containing the offer and add the delegated provider as its subscriber (as a cloud operator)
+> In this task, you will:
+> - Create a new subscription containing the offer and add the delegated provider as its subscriber (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **New**
+- [] On the **New** blade, click **Offers + Plans**
+- [] On the **Offers + Plans** blade, click **Subscription**.
+- [] On the **New user subscription** blade, specify the following information:
+
+    > - Display name: **DelegatedProvider-subscription**
+    > - User: **delegatedprovider@<\tenant_name>.onmicrosoft.com**
+    > - Provider subscription: **Default Provider Subscription**
+    > - Directory tenant: **<\tenant_name>.onmicrosoft.com**
+
+- [] Click **Offer**
+- [] On the **Offers** blade, click **cotodp-subscription-offer**
+- [] Click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+> **Result:**
+> After completing this exercise, you have designated the delegated provider
+
+#Lab 03 - Exercise #3 - Create and delegate a delegated offer to a delegated provider (as a cloud operator)
+> In this exercise, you will act as a cloud operator and create an offer containing services, which the delegated provider will then offer to its tenants:
+> - Create a plan to delegate (as a cloud operator)
+> - Create an offer based on the plan (as a cloud operator)
+> - Delegate the offer to the delegated provider (as a cloud operator)
+
+##Task 1: Create a plan to delegate (as a cloud operator)
+> In this task, you will:
+> - Create a plan to delegate (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **New**
+- [] On the **New** blade, click **Offers + Plans**
+- [] On the **Offers + Plans** blade, click **Plan**
+- [] On the **New plan** blade, specify the following information:
+
+    > - Display name: **co-services-plan**
+    > - Resource name: **co-services-plan**
+    > - Resource group: click **Create new** and type **CO-services-rg**
+
+- [] Click **Services**
+- [] On the **Services** blade, click **Microsoft.Storage**
+- [] Click **Select**
+- [] Click **Quotas**
+- [] On the **Quotas** blade, click **Microsoft.Storage (local)**
+- [] On the **Quotas** blade, click **Create new quota**
+- [] On the **Create quota** blade, specify the following settings:
+
+    > - Name: **CO-services-Storage-quota**
+    > - Maximum capacity (GB): **50**
+    > - Total number of storage accounts: **1**
+
+- [] Click **OK**
+- [] Click **CO-services-Storage-quota**
+- [] Click **OK**
+- [] Click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+##Task 2: Create an offer based on the plan (as a cloud operator)
+> In this task, you will:
+> - Create an offer based on the plan (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **New**
+- [] On the **New** blade, click **Offers + Plans**
+- [] On the **Offers + Plans** blade, click **Offer**
+- [] On the **New offer** blade, specify the following information:
+
+    > - Display name: **Cotodp-services-offer**
+    > - Resource name: **cotodp-services-offer**
+    > - Provider subscription: **Default Provider Subscription**
+    > - Resource group: **CO-services-rg**
+
+- [] Click **Base plans**
+- [] On the **Plan** blade, click **CO-services-plan**
+- [] Click **Select**
+- [] Leave **Add-on plans** set to **None** and click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+##Task 3: Delegate the offer to a delegated provider (as a cloud operator)
+
+> In this task, you will:
+> - Delegate the offer to the delegated provider (as a cloud operator)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Offers**
+- [] On the **Offers** blade, click **cotodpservices-offer**
+- [] On the **Cotodp-services-offer** blade, click **Delegated providers**
+- [] Click **+Add**
+- [] On the **Delegate offer** blade, specify the following:
+
+    > - Name: **cotodp-services-offer**
+    > - Pick the delegated provider subscription: **delegatedprovider-subscription**
+
+- [] Click **Delegate**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+> **Result:**
+> After completing this exercise, you have created and delegated the offer to a delegated provider.
+
+#Lab 03 - Exercise #4 - Create a delegated offer to a tenant (as a delegated provider)
+> In this exercise, you will act as a delegated provider and create an offer (based on the offer from the cloud operator) to which your tenants will be able to subscribe:
+> - Create a delegated provider offer for a tenant (as a cloud operator)
+> - Identify the URL of the delegated provider portal (as a delegated provider)
+
+##Task 1: Create a delegated provider offer for a tenant (as a delegated provider)
+> In this task, you will:
+> - Create an offer for a tenant (as a delegated provider) based on the cloud operator offer for the delegated provider
+> This will allow tenants to create a subscription based on the offer from the delegated provider
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **delegatedprovider@<\tenant_name>.onmicrosoft.com**
+    > - Password: use previously noted password for delegatedprovider and change with **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Offers**
+- [] On the "**Offers** blade, click **+Add**
+- [] On the **New offer** blade, specify the following settings:
+
+    > - Display name: **dptotenantuser-services-offer**
+    > - Resource name: **dptotenantuser-services-offer**
+    > - Provider subscription: **delegatedprovider-subscription**
+    > - Resource group: create a **new resource group** called **DP-rg**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds.
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Offers**
+- [] Click the newly created offer **dptotenantuser-services-offer**
+- [] On the **dptotenantuser-services-offer** blade, click **Change state** and, in the drop-down list, click **Public**
+
+##Task 2: Identify the URL of the delegated provider portal (as a delegated provider)
+> In this task, you will:
+> - Identify the URL of the delegated provider portal (as a delegated provider)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **delegatedprovider@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **More services**
+- [] In the list of services, click **Subscriptions**
+- [] Click **delegatedprovider-subscription**
+- [] On the delegated provider subscription blade, click **Properties**
+- [] On the properties blade, copy the value of the **PORTAL URL** to clipboard. You will need it in the next exercise of this lab,
+- [] **Sign out** from the [Azure Stack Tenant Portal][azurestack-tenantportal]
+
+> [!KNOWLEDGE]Tenants need to subscribe to the offer from the delegated provider portal URL
+
+> **Result:**
+> After completing this exercise, you have created a delegated provider offer
+
+#Lab 03 - Exercise #5 - Sign up for a delegated provider’s offer (as a tenant user-tenantuser)
+> In this exercise, you will act as a tenant user who signs up for a delegated provider’s offer and creates a resource in the new subscription. The exercise consists of the following tasks:
+> - Sign up for the delegated provider’s offer (as a tenant user-tenantuser)
+> - Create a resource in the new subscription (as a tenant user-tenantuser)
+
+##Task 1: Sign up for the delegated provider’s offer (as a tenant user-tenantuser)
+> In this task, you will:
+> - Sign up for the delegated offer (as a tenant user-tenantuser)
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: use previously noted password for tenantuser and change with **@lab.VirtualMachine(55267).Password**
+
+- [] Once you logged on with **tenantuser@<\tenant_name>.onmicrosoft.com** navigate to the Azure Stack delegated provider portal by using the **URL identified** in task 2 of the **previous exercise**
+
+> [!ALERT] Make sure NOT to use the Azure tenant portal **URL** in this case
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Get a Subscription** on the dashboard
+- [] On the **Get a subscription** blade, in the **Display name** text box, type **Tenantuser-subscription**
+- [] Click **Select an offer**
+- [] On the **Choose an offer** blade, click **Dptotenantuser-services-offer**
+- [] Click **Create**
+- [] In the message box **Your subscription has been created. You must refresh the portal to start using your subscription**, click **Refresh**
+
+
+##Task 2: Create a resource in the new subscription (as a tenant user-tenantuser)    
+> In this task, you will:
+> - Create a resource in the new subscription (as a tenant user-tenantuser)
+
+- [] Back in the [Azure Stack Tenant Portal][azurestack-tenantportal], click **More services**
+- [] In the list of services, click **Subscriptions**
+- [] On the **Subscriptions** blade, click **tenantuser-subscription**
+- [] Click **Resources**
+- [] Click **+Add**
+- [] On the **New** blade, click **Data + Storage**
+- [] On the **Storage** blade, click **Storage account**
+- [] On the **Create storage account** blade, specify the following settings and click
+
+    > - Name: any unique name consisting of between 3 and 24 lower case letters or digits
+    > - Account kind: **General purpose**
+    > - Performance: **Standard**
+    > - Replication: **Locally-redundant storage (LRS)**
+    > - Subscription: **tenantuser-subscription**
+    > - Resource group: create a new group **delegatedlab-RG**
+    > - Location: **local**
+
+> [!ALERT] Wait for the deployment to complete. This should take less than a minute
+
+- [] Verify that the storage account has been successfully created.
+- [] Repeat above steps to **Create storage account**. Note that this time you will receive an error message due to exceeded quotas.
+
+> **Result:**
+> After completing this exercise, you have subscribed to a delegated provider’s offer, creating this way a new subscription and provisioned a storage account in the new subscription.
+
 ===
 
-#Lab 03 - Working with ARM Templates
+#Lab 04 - Working with ARM Templates
 
-##^[**Objectives and Summary**][lab02-os]
+##^[**Objectives and Summary**][lab04-os]
 
-> [lab02-os]:
+> [lab04-os]:
 > ###Introduction
 >> In this lab we are going to deploy Standalone file server using an ARM template
 >
 > ###Objectives
 > In this lab, you will:
-> - •	Create a standalone file server VM 
-> - •	Have a general view of ARM template structure
+> - Create a standalone file server VM 
+> - Have a general view of ARM template structure
 > ###Prerequisites
->>> [!ALERT] In order to successfuly complete this lab **Lab 01 & Lab 02** must be completed.
+>>> [!ALERT] In order to successfuly complete this lab **Lab 01**, and **Lab 02** must be completed.
 >
 > ###Variables
 >> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
@@ -523,7 +990,7 @@ The output will be similar to as follows:
 >> Deploy single file server to be used on App Service installation,
 
 ===
-#Lab 03 - Exercise #1 - Deploy Templates using the Portal
+#Lab 04 - Exercise #1 - Deploy Templates using the Portal
 
 - [] Logon Azure Stack host VM with RDP client using following information;
     
@@ -541,12 +1008,12 @@ The output will be similar to as follows:
 - [] On Custom template blade click  **Template / Edit template** > **QuickStart template**
 - [] On Edit template blade click  **Quick template** > **QuickStart template**
 
-    !IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab03-e1-i1.png)
+    !IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab04-e1-i1.png)
 
 - [] Click **select a template (disclaimer)**. Review wide range of the templates.
 - [] On Load a quick template section in select a template (disclaimer) combobox select **appservice-fileserver-standalone**
 
-    !IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab03-e1-i2.png)
+    !IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab04-e1-i2.png)
 
 - [] Click **OK** to load template
 
@@ -566,7 +1033,7 @@ The output will be similar to as follows:
 > - FILESHAREUSERPASSWORD (securestring): **@lab.VirtualMachine(55267).Password**
 > - VMEXTENSIONSCRIPTLOCATION (string): leave default settings
 
-!IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab03-e1-i3.png)
+!IMAGE[Lab Image](https://github.com/yagmurs/Wplus-AzS/raw/master/screens/lab04-e1-i3.png)
 
 - [] Click **OK**
 - [] On Custom deployment blade set Resource Group name as **appservicefilesharerg** select **create new** radio button, and click **Create**
@@ -579,7 +1046,7 @@ The output will be similar to as follows:
 
 ===
 
-#Lab 03 - Exercise #2 - Deploy Templates with PowerShell
+#Lab 04 - Exercise #2 - Deploy Templates with PowerShell
 
 - [] Logon Azure Stack host VM with RDP client using following information;
     
@@ -646,7 +1113,6 @@ New-AzureRmResourceGroup -Name $RGName -Location $myLocation
 
 # Create Storage Group refering Uri on Azure Stack Quickstart gallery
 New-AzureRmResourceGroupDeployment `
--Name MyStorageAccount `
 -ResourceGroupName $RGName `
 -TemplateUri <\link on clipboard> `
 -StorageaccountType Standard_LRS
@@ -661,6 +1127,303 @@ New-AzureRmResourceGroupDeployment `
 - [] On Resource groups blade, click **AzsStorageAccountRG** to check if there is a Storage account with random name in **AzsStorageAccountRG** blade
 
 ===
+
+#Lab 05 - Deploy Azure VM to host Azure Stack Development Kit (ASDK) in connected mode
+
+##^[**Objectives and Summary**][lab05-os]
+
+> [lab05-os]:
+> ###Introduction
+>> This Lab covers enabling, configuring, and manually scaling Virtual Machine scale sets to be used in Azure Stack
+>
+> ###Objectives
+> In this lab, you will:
+> - Enable Virtual Machine scale sets feature
+> - Connect to Azure Stack as a tenant
+> - Deploy a Virtual Machine scale set
+> - Manually scale up Virtual Machine scale set
+>
+> ###Prerequisites
+>>> [!ALERT] In order to successfuly complete this lab **Lab 01**, **Lab 02**, and **Lab 03** must be completed.
+>
+> ###Variables
+>> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>>
+>> Following scheme stands for password you have assigned to **Administrator**. Same password is used for *AZURESTACK\AzureStackAdmin*, and *AZURESTACK\CloudAdmin* which will be used on Azure Stack development kit. These are AZURESTACK domain identities that may be used to logon Azure VM.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>
+> ###Estimated time to complete this lab
+>> **60 Minutes**
+>
+> ###Scenario
+>> Enable Virtual Machine Scale Set feature in Azure Stack using PowerShell via Cloud Operator account.
+Afterwards logon to your tenant and create a virtual machine scale set and then manually scale it
+
+===
+
+#Lab 05 - Exercise #1 - Enabling VM scale set on Azure Stack
+> In this exercise, you will act as a cloud operator and enable Virtual Machine scale sets feature on Azure Stack:
+> - Enable Virtual Machine scale sets feature on Azure Stack as a cloud operator
+> - Publish VM scale set marketplace item
+
+##Task 1: Enable Virtual Machine Scale Sets
+> In this task, you will:
+> - Enable Virtual Machine scale sets feature on Azure Stack
+> - Publish VM scale set marketplace item
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and replace **< >** fields between brackets with the values represent your environment.
+
+> [!KNOWLEDGE] This will enable Virtual Machine scale sets on your Azure Stack deployment
+
+```PowerShell
+#Variables
+$defaultLocalPath = "C:\AzureStackOnAzureVM"
+$location = "local"
+
+$AadAdmin = "@lab.UserFirstName@<\tenant_name>.onmicrosoft.com"
+$AadTenant = "<\tenant_name>.onmicrosoft.com"
+ 
+# Create Azure AD credential object
+$AadAdminPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force
+$AadAdminCred = New-Object System.Management.Automation.PSCredential ("$AadAdmin", $AadAdminPass)
+ 
+cd\
+cd $defaultLocalPath
+cd AzureStack-Tools-master
+
+Import-Module .\ComputeAdmin\AzureStack.ComputeAdmin.psm1
+Import-Module .\Connect\AzureStack.Connect.psm1
+
+$ArmEndpoint = "https://adminmanagement.local.azurestack.external"
+$KeyvaultDnsSuffix = “adminvault.local.azurestack.external”
+ 
+# Register an AzureRM environment that targets your Azure Stack instance
+Add-AzureRMEnvironment -Name "AzureStackAdmin" -ArmEndpoint $ArmEndpoint
+
+Set-AzureRmEnvironment -Name "AzureStackAdmin" -GraphAudience $GraphAudience 
+
+# Get the Active Directory tenantId that is used to deploy Azure Stack
+$TenantID = Get-AzsDirectoryTenantId -AADTenantName $AadTenant -EnvironmentName "AzureStackAdmin"
+
+# Sign in to your environment
+Login-AzureRmAccount -EnvironmentName "AzureStackAdmin" -TenantId $TenantID -Credential $AadAdminCred
+
+Add-AzsVMSSGalleryItem -Location $location
+```
+
+> **Result:**
+> After completing this exercise, you have enabled Virtual Machine scale sets on your Azure Stack deployment
+
+#Lab 05 - Exercise #2 - Deploy a virtual machine scale set (VMSS) using Azure Stack tenant portal
+> In this exercise, you will act as a tenant and deploy Virtual Machine Scale Set:
+> - Deploy a Virtual Machine scale set
+
+##Task 1: Deploy a virtual machine scale set
+> In this task, you will:
+> - Deploy a Virtual Machine scale set
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **New**
+- [] On the **New** blade, click **Compute**
+- [] On the **Compute** blade, click **Virtual Machine scale set**
+- [] On the **Create Virtual machine scale set** blade, **STEP 1 - Basics** specify the following information:
+
+    > - Virtual machine scale set name: rg01vmss
+    > - OS type: select **Windows**
+    > - User name: **localadm**
+    > - Password: **@lab.VirtualMachine(55267).Password** twice
+    > - Subscription: **<\Subscription>**
+    > - Resource group: select **Create new**
+    > - Resource group name: **rg01**
+    > - Location: **local**
+
+- [] Click **OK**
+    
+- [] On the **Create Virtual machine scale set** blade, **STEP 2 - Virtual machine scale set service settings**:
+- [] Click on **Public IP address**, specify the following information:
+
+    > - Name: **rg01ip01**
+    > - Assignment: **Dynamic**
+
+- [] Click **OK**
+
+- [] Back in the **Create Virtual machine scale set** blade, **STEP 2 - Virtual machine scale set service settings** specify the following information:
+
+    > - Domain name label: **testapp01**
+    > - Operating system disk image: **2016-Datacenter**
+    > - Instance count: **1**
+
+- [] Click **OK**
+ 
+- [] On the **Create Virtual machine scale set** blade, **STEP 3 - Summary**, Make sure all information is correct:
+- [] Click **OK**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] On the **Resource groups** blade, click **rg01**
+- [] On the **rg01 - Deployments** blade, click on **Deployments**
+
+> [!ALERT] Wait for deployment to finish, this will take approximately 15 minutes
+
+##Task 2: Validate virtual machine scale set deployment
+
+> In this task, you will:
+> - Validate Virtual Machine scale set deployment
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Open **Start Menu**
+- [] Search for **Remote Desktop Connection**
+- [] In the **Remote Desktop Connection**, connect **++testapp01.local.cloudapp.azurestack.external:50000++** using following information;
+
+    > - Username: **\localadm**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+> **Result:**
+> After completing this exercise, you have deployed Virtual Machine scale sets using tenant subscription
+
+#Lab 05 - Exercise #3 - Manually scale up VMs using PowerShell
+> In this exercise, you will act as a tenant and manually scale your Virtual Machine Scale Set:
+> - Configure PowerShell to access tenant subscription
+> - Manually scale a Virtual Machine scale set
+
+##Task 1: Configure PowerShell Environment for Tenant
+> In this task, you will:
+> - Configure PowerShell to access tenant subscription
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and replace **< >** fields between brackets with the values represent your environment.
+
+> [!KNOWLEDGE] This will set up tenant PowerShell environment and logon using Powershell
+
+```PowerShell
+# Variables
+$defaultLocalPath = "C:\AzureStackOnAzureVM"
+$Tenant = "tenantuser@<\tenant_name>.onmicrosoft.com"
+$AadTenant = <\tenant_name>.onmicrosoft.com
+$location = "local"
+
+$TenantPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force 
+$TenantCred = New-Object System.Management.Automation.PSCredential ("$Tenant", $TenantPass) 
+
+# Change to tools directory. 
+cd\
+cd $defaultLocalPath
+cd AzureStack-Tools-master
+
+# Navigate to the downloaded folder and import the **Connect** PowerShell module 
+Import-Module .\ComputeAdmin\AzureStack.ComputeAdmin.psm1
+Import-Module .\Connect\AzureStack.Connect.psm1
+
+$ArmEndpoint =  "https://management.local.azurestack.external"
+$KeyvaultDnsSuffix = “vault.local.azurestack.external”
+
+# Register an AzureRM environment that targets your Azure Stack instance
+Add-AzureRMEnvironment ` 
+  -Name "AzureStackTenant" ` 
+  -ArmEndpoint $ArmEndpoint 
+
+Set-AzureRmEnvironment `
+  -Name "AzureStackTenant" `
+  -GraphAudience $GraphAudience
+
+# Get the Active Directory tenantId
+$TenantID = Get-AzsDirectoryTenantId -AADTenantName $AadTenant -EnvironmentName "AzureStackTenant"
+
+# Sign in to your environment 
+Login-AzureRmAccount ` 
+  -EnvironmentName "AzureStackTenant" `
+  -TenantId $TenantID `
+  -Credential $TenantCred
+```
+
+
+##Task 2: Manually scale up VMs using PowerShell
+> In this task, you will:
+> - Manually scale a Virtual Machine scale set
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and replace **< >** fields between brackets with the values represent your environment.
+
+> [!KNOWLEDGE] This will scale up Virtual Machine scale set called **rg01** instance count from **1** to **2**
+
+```PowerShell
+$vmss = Get-AzureRmVmss -ResourceGroupName rg01
+$vmss = Get-AzureRmVmss -ResourceGroupName rg01 -VMScaleSetName $vmss[0].Name
+
+$vmss.sku.Capacity = 2
+Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -VirtualMachineScaleSet $vmss
+```
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] On the **Resource groups** blade, click **rg01**
+- [] On the **rg01 - Deployments** blade, click on **Deployments**
+- [] Select **Virtual Machine Scale Set** type from the list of resources
+- [] On the **rg01vmms** blade, click **Instances**
+- [] On the **rg01vmms** blade, click **Instances**
+
+> [!KNOWLEDGE] You should see 1 instance running and another one being created.
+
+> [!ALERT] Wait for the deployment to complete. This should take about 15 minutes
+
+##Task 3: Validate Virtual Machine Scale set
+> In this task, you will:
+> - Validate the result of sclaing up Virtual Machine Scale set on previous task
+
+
+- [] To validate the VM you may open a Remote Desktop Connection.
+
+> [!KNOWLEDGE] Because of the default load balancer rules, port 50001 on the Load Balancer will be mapped to the second VM in the scale set on port 3389.
+
+- [] Open **Start Menu**
+- [] Search for **Remote Desktop Connection**
+- [] In the **Remote Desktop Connection**, connect **++testapp01.local.cloudapp.azurestack.external:50001++** using following information;
+
+    > - Username: **\localadm**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+> **Result:**
+> After completing this exercise, you have connected to your tenant subscription using PowersShell, manually scaled up Virtual Machine scale set, and validated the connectivity to all intances
+
+[Reference Document][labxx-e1-rl]
 
 #References
 [lab01-e1-rl]:https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-deploy
