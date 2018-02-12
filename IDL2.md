@@ -208,9 +208,9 @@ When you try to create any of the items notice that it’s asked you to **Sign u
 
 ===
 
-#Lab 01 - Exercise #4
+#Lab 01 - Exercise #4 - Setup Admin Management Environment
 
-##Install Azure Stack PowerShell
+##Task 1: Install Azure Stack PowerShell
 
 - [] Logon Azure Stack host VM with RDP client using following information;
     
@@ -247,7 +247,7 @@ Install-Module `
 > [!KNOWLEDGE] Within the following exercise we will continue to setup management environment as a stepping stone to register Azure Stack to Azure Active Directory
 [Reference Document][lab01-e4-rl1]
 
-##Download Azure Stack tools and extract
+##Task 2: Download Azure Stack tools and extract
 
 > [!KNOWLEDGE] AzureStack-Tools is a GitHub repository that hosts PowerShell modules for managing and deploying resources to Azure Stack 
 
@@ -281,7 +281,7 @@ expand-archive master.zip -DestinationPath . -Force
 ```
 [Reference Document][lab01-e4-rl2]
 
-##Configure PowerShell - Cloud operator
+##Task 3: Configure PowerShell - Cloud operator
 
 > [!KNOWLEDGE] As an Azure Stack operator, you can configure your Azure Stack Development Kit's PowerShell environment. After you configure, you can use PowerShell to manage Azure Stack resources such as creating offers, plans, quotas, managing alerts, etc. by PowerShell
 
@@ -343,7 +343,7 @@ Login-AzureRmAccount `
   -TenantId $TenantID ` 
   -Credential $AadAdminCred
 ```
-##Test Azure Stack PowerShell
+##Task 4: Test Azure Stack PowerShell
 
 > [!KNOWLEDGE] Now we have configured PowerShell, we can test the configuration by creating a resource group
 
