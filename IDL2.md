@@ -41,42 +41,63 @@
 
 ===
 #Lab 01 - Exercise #1 - Deploy Azure Stack host using ARM Template
-- [] Logon [Azure Portal][azure-portal] using your Microsoft Account **@lab.UserEmail**
+> In this exercise, you will deploy Azure VM to host Azure Stack using ARM template
+> - Create additional admin account to use on following lab exercises
+> - Delegate the account on subscription to be able to manage subscription and register Azure Stack on following lab exercises
+> - Deploy Azure Stack Host VM to Azure using ARM template
 
-    > [!ALERT] If you don't have Microsoft Account, please [Create a new Microsoft Account][rl1]
+##Task 1: Create additional admin account
+> In this task, you will:
+> - Create additional admin account to use on following lab exercises
+
+- [] Within **Client 01**, open a browser
+- [] Logon [Azure Portal][azure-portal] using following information;
+    
+    > - **@lab.UserEmail**
+
+> [!ALERT] If you don't have Microsoft Account, please [Create a new Microsoft Account][rl1]
 
 - [] [*Register Azure Pass*][azure-pass]
-- [] On Main menu click **More services** > **Azure Active Directory**
-- [] On Quick tasks click **Add a user**.
+- [] In the [Azure Portal][azure-portal], click **More services**, and then **Azure Active Directory**
+- [] On **Quick tasks**, click **Add a user**, specify the following settings.
 
-Specify the following settings.
-> - Name: **@lab.UserFirstName**
-> - User name: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
-> - Profile: **Not configured**
-> - Directory Role: **Global administrator**
-> - Password: check **Show Password**
-> - **Copy** the password to **clipboard**
+    > - Name: **@lab.UserFirstName**
+    > - User name: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Profile: **Not configured**
+    > - Directory Role: **Global administrator**
+    > - Password: check **Show Password**
+    > - **Copy** the password to **clipboard**
 
 - [] Click **Create**
 
 > [!KNOWLEDGE] Tenant user now created, needs to be the **Owner** for the Azure subscription
 
-- [] On Main menu click **More services** > **Subscriptions**
-- [] On the subscriptions blade click on your **Azure Pass** Subscription
-- [] On the Azure Pass blade click **Access control (IAM)** > **+Add**
+##Task 2: Delegate the account on subscription
+> In this task, you will:
+> - Delegate the account on subscription to be able to manage subscription and register Azure Stack on following lab exercises
 
-On the Add permissions blade, specify the following settings
-> - Role: **Owner**
-> - Assign Access to: **Azure AD user,group or application**
-> - Select: **@lab.UserFirstName**
+- [] In the [Azure Portal][azure-portal], click **More services**, and then **Subscriptions**
+- [] On the **Subscriptions** blade, click **Azure Pass** subscription
+- [] On the **Azure Pass** blade, click **Access control (IAM)**, and then **+Add**
+
+- [] On the **Add permissions** blade, specify the following settings
+
+    > - Role: **Owner**
+    > - Assign Access to: **Azure AD user,group or application**
+    > - Select: **@lab.UserFirstName**
 
 - [] User should be listed. Click @lab.UserFirstName@<\tenant_name>.onmicrosoft.com to add user to Selected members
 - [] Click **Save**
 
 - [] Sign out from current session.
-- [] Logon [Azure Portal][azure-portal] with **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com** and use the temporary password previously saved
+- [] Logon [Azure Portal][azure-portal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **temporary password previously saved**
+
 - [] You will be prompted to change the password.
-- [] Enter previous password and **@lab.VirtualMachine(55267).Password** twice. Click **OK**
+- [] Enter previous password and **@lab.VirtualMachine(55267).Password** twice.
+- [] Click **OK**
 
     > [!ALERT] This will make sure that you have changed the temporary password
 
@@ -84,64 +105,86 @@ On the Add permissions blade, specify the following settings
 
 > [!KNOWLEDGE] Now, we may start deploying Azure VM to host ASDK
 
-- [] Open up new browser and go to [https://github.com/yagmurs/AzureStack-VM-PoC][github-repo]
+##Task 3: Deploy Azure Stack Host VM
+> In this task, you will:
+> - Deploy Azure Stack Host VM to Azure using ARM template
+
+- [] Within **Client 01**, open a browser
+- [] Navigate to [https://github.com/yagmurs/AzureStack-VM-PoC][github-repo]
 - [] Click [**Deploy to Azure**][github-repo-deploytoazure] button to deploy Azure Stack host template to Azure
 - [] Browser will be redirected to your <\tenant_name>.onmicrosoft.com portal with ARM template settings to be completed
-- [] On **Customized template** blade > **Resource Group**
-- [] Click **Create New**
 
-On Custom deployment blade, Specify the following settings
-> - Resource Group: **AzureStackPremierWorkshop**
-> - Location: **<\Any region that is closer to your location>**
-> - Virtual Machine Name: **AzS-Host1**
-> - Admin Password: **@lab.VirtualMachine(55267).Password**
-> - Public DNS Name: **<\Any name that does not conflict>**
+- [] On **Custom deployment** blade, specify the following settings
 
-- [] Check TERMS AND CONDITIONS and click **Purchase**
+    > - Resource Group: select Create new **AzureStackPremierWorkshop**
+    > - Location: **<\Any region that is closer to your location>**
+    > - Virtual Machine Name: **AzS-Host1**
+    > - Admin Password: **@lab.VirtualMachine(55267).Password**
+    > - Public DNS Name: **<\Any name that does not conflict>**
+    > - Auto Shutdown Status: **Disabled**
 
-> [!NOTE] VM installation takes about 10 to 20 minutes depends on the region and load.
+- [] Check, **TERMS AND CONDITIONS** and click **Purchase**
+
+> [!ALERT] Wait for the deployment to complete. This should take about 10 to 20 minutes depends on the region and load.
+
+> **Result:**
+> After completing this exercise, you have deployed Azure VM to host Azure Stack using ARM template and created addtional Global Administrator account on Azure Active Directory
 
 ===
 
 #Lab 01 - Exercise #2 - Deploy Azure Stack Development Kit (ASDK)
+> In this exercise, you will install Azure Stack Development Kit
 
-- [] Logon [Azure Portal][azure-portal] using your Microsoft Account **@lab.UserEmail**
+##Task 1: Start Azure Stack Development Kit installation
+> In this task, you will:
+> - Start installing Azure Stack Development Kit
 
-- [] On Main menu click **More services** > **Virtual Machines**
+- [] Logon [Azure Portal][azure-portal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
 
-- [] On Virtual Machines blade > right click on created VM **AzS-Host1** > click **Connect**
+- [] In the [Azure Portal][azure-portal], click **More services**, and then **Virtual Machines**
 
-- [] Logon to host VM with RDP client using **Administrator** user with **@lab.VirtualMachine(55267).Password**
+- [] On **Virtual Machines** blade, *right click* on created VM **AzS-Host1** > click **Connect**
 
-- [] On desktop right click **Install-ASDK.ps1**, click **Run with PowerShell** to run. 
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **\Administrator**
+    > - Password: **@lab.VirtualMachine(55267).Password**
 
-Within the PowerShell window, specify the following information.
-> - Execution Policy Change: **Y** to continue if prompted
-> - Local 'Administrator' Password: **@lab.VirtualMachine(55267).Password** twice
-> - Azure AD Global Administrator user: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
-> - Azure AD Global Administrator password: **@lab.VirtualMachine(55267).Password** twice
-> - Admin Password: **@lab.VirtualMachine(55267).Password**
-> - Select: **1**
+- [] On desktop *right click* **Install-ASDK.ps1**, click **Run with PowerShell** to run. 
+
+- [] Within the **PowerShell** window, specify the following information;
+
+    > - Execution Policy Change: **Y** to continue if prompted
+    > - Local 'Administrator' Password: **@lab.VirtualMachine(55267).Password** twice
+    > - Azure AD Global Administrator user: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Azure AD Global Administrator password: **@lab.VirtualMachine(55267).Password** twice
+    > - Admin Password: **@lab.VirtualMachine(55267).Password**
+    > - Select: **1**
 
 > [!ALERT] Unless you instructed by the trainer, always select **1** to install the latest ASDK version
 
-- [] Enter to continue 
+- [] **Enter to continue**
 
-Automated setup will continue as follows:
-> [!KNOWLEDGE] 
-- Download latest version of ASDK
-- Extract files to D:\
-- Copy required files to C:\
-- Extract setup packages to C:\
-- Run C:\CloudDeployment\Setup\InstallAzureStackPOC.ps1 with required parameters
+> [!KNOWLEDGE] Above automated setup will continue as follows:
+- *Download latest version of ASDK*
+- *Extract files to D:\*
+- *Copy required files to C:\*
+- *Extract setup packages to C:\*
+- *Run C:\CloudDeployment\Setup\InstallAzureStackPOC.ps1 with required parameters*
 
 > [!ALERT] During ASDK deployment you may lose connectivity to host due to network configuration changes.
 
-> [!KNOWLEDGE] Azure Stack host will also reboot during the deployment to join the host to AZURESTACK domain.
+> [!ALERT] Azure Stack host will also reboot during the deployment to join the host to AZURESTACK domain.
 
-> [!KNOWLEDGE] To follow setup progress after reboot, logon using AZURESTACK\AzureStackAdmin and password @lab.VirtualMachine(55267).Password
+> [!ALERT] To follow setup progress after reboot, logon using AZURESTACK\AzureStackAdmin and password @lab.VirtualMachine(55267).Password
 
 > [!ALERT] This process takes about 5-6 hours to complete
+
+> **Result:**
+> After completing this exercise, you have successfully deployed Azure Stack Development Kit (**ASDK**)
 
 ===
 
@@ -149,7 +192,9 @@ Automated setup will continue as follows:
 
 > [!KNOWLEDGE] Now Azure Stack Development Kit is installed
 
-##Explore Admin Portal
+##Task 1: Explore Admin Portal
+
+
 - [] Logon Azure Stack host VM with RDP client using following information;
     > - Username: **AZURESTACK\AzureStackAdmin**
     > - Password: **@lab.VirtualMachine(55267).Password**
@@ -184,7 +229,7 @@ Automated setup will continue as follows:
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
 
-##Explore Tenant Portal 
+##Task 2: Explore Tenant Portal 
 
 - [] Logon Azure Stack host VM with RDP client using following information;
     
@@ -353,7 +398,10 @@ New-AzureRMResourceGroup -Name "Test-Resource-Group" -Location Local
 
 ===
 
-#Lab 01 - Exercise #5
+#Lab 01 - Exercise #5 - Register Azure Stack with Azure
+
+##Task 1: Register Azure Stack
+
 > [!KNOWLEDGE] Registration is recommended because it enables you to test important Azure Stack functionality, like marketplace syndication and usage reporting.
 After you register Azure Stack, usage is reported to Azure commerce. You can see it under the subscription you used for registration.
 Azure Stack Development Kit users are not charged for any usage they report.
@@ -449,6 +497,7 @@ The output will be similar to as follows:
 ===
 #Lab 02 - Exercise #1 - Download an Azure (Stack) Marketplace Items using Management Portal
 
+##Task 1: Download marketplace items
 - [] Logon Azure Stack host VM with RDP client using following information;
     
     > - Username: **AZURESTACK\AzureStackAdmin**
@@ -937,15 +986,17 @@ The output will be similar to as follows:
 - [] Click **+Add**
 - [] On the **New** blade, click **Data + Storage**
 - [] On the **Storage** blade, click **Storage account**
-- [] On the **Create storage account** blade, specify the following settings and click
+- [] On the **Create storage account** blade, specify the following settings;
 
     > - Name: any unique name consisting of between 3 and 24 lower case letters or digits
     > - Account kind: **General purpose**
     > - Performance: **Standard**
     > - Replication: **Locally-redundant storage (LRS)**
-    > - Subscription: **tenantuser-subscription**
+    > - Subscription: **leave as is**
     > - Resource group: create a new group **delegatedlab-RG**
     > - Location: **local**
+
+- [] Click **Create**
 
 > [!ALERT] Wait for the deployment to complete. This should take less than a minute
 
@@ -1128,7 +1179,7 @@ New-AzureRmResourceGroupDeployment `
 
 ===
 
-#Lab 05 - Deploy Azure VM to host Azure Stack Development Kit (ASDK) in connected mode
+#Lab 05 - Enable Virtual Machine Scale Sets in Azure Stack
 
 ##^[**Objectives and Summary**][lab05-os]
 
@@ -1223,7 +1274,7 @@ Add-AzsVMSSGalleryItem -Location $location
 
 > **Result:**
 > After completing this exercise, you have enabled Virtual Machine scale sets on your Azure Stack deployment
-
+===
 #Lab 05 - Exercise #2 - Deploy a virtual machine scale set (VMSS) using Azure Stack tenant portal
 > In this exercise, you will act as a tenant and deploy Virtual Machine Scale Set:
 > - Deploy a Virtual Machine scale set
@@ -1253,7 +1304,7 @@ Add-AzsVMSSGalleryItem -Location $location
     > - OS type: select **Windows**
     > - User name: **localadm**
     > - Password: **@lab.VirtualMachine(55267).Password** twice
-    > - Subscription: **<\Subscription>**
+    > - Subscription: **leave as is**
     > - Resource group: select **Create new**
     > - Resource group name: **rg01**
     > - Location: **local**
@@ -1304,7 +1355,7 @@ Add-AzsVMSSGalleryItem -Location $location
 
 > **Result:**
 > After completing this exercise, you have deployed Virtual Machine scale sets using tenant subscription
-
+===
 #Lab 05 - Exercise #3 - Manually scale up VMs using PowerShell
 > In this exercise, you will act as a tenant and manually scale your Virtual Machine Scale Set:
 > - Configure PowerShell to access tenant subscription
@@ -1321,7 +1372,7 @@ Add-AzsVMSSGalleryItem -Location $location
 
 - [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and replace **< >** fields between brackets with the values represent your environment.
 
-> [!KNOWLEDGE] This will set up tenant PowerShell environment and logon using Powershell
+> [!KNOWLEDGE] The following Powershell script will set up tenant PowerShell environment and logon using Powershell to manage Azure Stack cloud resources
 
 ```PowerShell
 # Variables
@@ -1376,13 +1427,19 @@ Login-AzureRmAccount `
 
 - [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and replace **< >** fields between brackets with the values represent your environment.
 
-> [!KNOWLEDGE] This will scale up Virtual Machine scale set called **rg01** instance count from **1** to **2**
+> [!KNOWLEDGE] The following Powershell script scales Virtual Machine scale set in **rg01** resource group Intances to **2**
 
 ```PowerShell
+# Select resource group by name
 $vmss = Get-AzureRmVmss -ResourceGroupName rg01
+
+# Select first VMSS in the resource group
 $vmss = Get-AzureRmVmss -ResourceGroupName rg01 -VMScaleSetName $vmss[0].Name
 
+#Increase the VMSS size to 2
 $vmss.sku.Capacity = 2
+
+#Apply settings to VMSS
 Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -VirtualMachineScaleSet $vmss
 ```
 
@@ -1398,7 +1455,6 @@ Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -
 - [] On the **rg01 - Deployments** blade, click on **Deployments**
 - [] Select **Virtual Machine Scale Set** type from the list of resources
 - [] On the **rg01vmms** blade, click **Instances**
-- [] On the **rg01vmms** blade, click **Instances**
 
 > [!KNOWLEDGE] You should see 1 instance running and another one being created.
 
@@ -1406,7 +1462,7 @@ Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -
 
 ##Task 3: Validate Virtual Machine Scale set
 > In this task, you will:
-> - Validate the result of sclaing up Virtual Machine Scale set on previous task
+> - Validate the result of scaling up Virtual Machine Scale set on previous task
 
 
 - [] To validate the VM you may open a Remote Desktop Connection.
@@ -1423,8 +1479,774 @@ Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -
 > **Result:**
 > After completing this exercise, you have connected to your tenant subscription using PowersShell, manually scaled up Virtual Machine scale set, and validated the connectivity to all intances
 
-[Reference Document][labxx-e1-rl]
+===
 
+#Lab 06 - Manage Storage Resources
+
+##^[**Objectives and Summary**][lab06-os]
+
+> [lab06-os]:
+> ###Introduction
+>> This Lab covers basic operations with storage accounts, such as creation, deletion and restoration of such resources.
+>
+> ###Objectives
+> In this lab, you will:
+> - Enable Retention Policy
+> - Create a new resource group
+> - Create a new storage account
+> - Delete a storage account
+> - Recover a deleted storage account
+> - Confirm storage account recovery
+> - Reclaim space
+>
+> ###Prerequisites
+>>> [!ALERT] In order to successfuly complete this lab **Lab 01**, **Lab 02**, and **Lab 03** must be completed.
+>
+> ###Variables
+>> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>>
+>> Following scheme stands for password you have assigned to **Administrator**. Same password is used for *AZURESTACK\AzureStackAdmin*, and *AZURESTACK\CloudAdmin* which will be used on Azure Stack development kit. These are AZURESTACK domain identities that may be used to logon Azure VM.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>
+> ###Estimated time to complete this lab
+>> **30 Minutes**
+>
+> ###Scenario
+>> Enable Retention policy for storage accounts in Azure Stack using Admin Portal via Cloud Admin account.
+Afterwards logon to your tenant and create a new resource group, and storage account under this resource group. Delete the same storage account to test retention policy.
+Login back to the Admin Portal and recover said storage account and validate that it is restored.
+
+===
+#Lab 06 - Exercise #1 - Working with retention policy
+> In this exercise, you will act as cloud operator to configure retention policy, recover storage account,
+and act as a tenant user to create, delete storage account, and confirm recovery of the storage account:
+> - Enable Retention Policy
+> - Create a new resource group
+> - Create a new storage account
+> - Delete a storage account
+> - Recover a deleted storage account
+> - Confirm storage account recovery
+
+##Task 1: Setup retention policy (as cloud operator)
+> In this task, you will:
+> - Change retention policy settings
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the Dashboard click **local** in **Region management** list
+- [] On the **local** blade, click **Resource providers**, then click **Storage**
+- [] On the **Storage** blade, click **Configuration**
+- [] Set *Retention period for deleted storage accounts (days)*: **15**
+- [] Click **Save**
+
+##Task 2: Create a storage account (as tenant user)
+> In this task, you will:
+> - Create a new resource group and a new storage account to be prepared upcoming lab exercises
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] On the **Resource Groups** blade, click **+Add**
+- [] On **Resource Group** blade, specify the following settings;
+
+    > - Resource group name: **rg02**
+    > - Subscription: **leave as is**
+    > - Resource group location: **local**
+
+- [] Click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take just a few seconds
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **+New**
+- [] On the **New** blade, click **Data + Storage**
+- [] On the **Storage** blade, click **Storage account**
+- [] On the **Create storage account** blade, specify the following settings;
+
+    > - Name: **rg02sa**
+    > - Account kind: **General purpose**
+    > - Performance: **Standard**
+    > - Replication: **Locally-redundant storage (LRS)**
+    > - Subscription: **leave as is**
+    > - Resource group: Use existing and select **rg02**
+    > - Location: **local**
+
+- [] Click **Create**
+
+> [!ALERT] Wait for the deployment to complete. This should take less than a minute
+
+##Task 3: Delete Storage Account (as tenant user)
+> In this task, you will:
+> - Delete a storage account to demostrate how to recover storage account on upcoming lab exercises
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] On the **Resource Groups** blade, click **rg02**
+- [] On the **rg02** blade, click **rg02sa** storage account
+- [] On the **rg02sa** blade, click **Delete** button
+- [] On the **Delete storage account** blade, specify the following settings;
+
+    > - Type the name of the storage account (rg02sa) to confirm: **rg02sa**
+
+- [] Click **Delete**
+
+> [!ALERT] Wait for processing to complete. This should take less than a minute
+
+- [] Confirm that rg02 is **empty**
+
+##Task 4: Restore the Storage Account (as cloud operator)
+> In this task, you will:
+> - Recover a deleted storage account on previous lab exercise
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the Dashboard click **local** in **Region management** list
+- [] On the **local** blade, click **Storage accounts**, then click **Filter**, and specify the following settings;
+
+    > - Account name: **rg02sa**
+    > - Tenant subscription ID: **leave empty**
+    > - Storage account status: **leave empty**
+
+- [] Click **Done**
+
+- [] On the **local - Storage accounts** blade, click **rg02sa@<\DateTime>**
+- [] On the **Storage account** blade, click **Recover** button, then click **yes**
+
+> [!ALERT] Wait for processing to complete. This should take less than a minute
+
+##Task 5: Confirm Recover operation (as tenant user)
+> In this task, you will:
+> - Confirm recovered storage account
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource groups**
+- [] On the **Resource Groups** blade, click **rg02**
+- [] On the **rg02** blade, click **rg02sa** storage account
+- [] Deleted storage account should be recovered and visible as a resource in the resource group.
+
+> **Result:**
+> After completing this exercise, you have configured retention policy, deletes storage account, and recovered storage account
+===
+#Lab 06 - Exercise #2 - Reclaim space from deleted storage accounts
+> In this exercise, you will act as a cloud operator and manually reclaim space to trigger cleanup process:
+> - Reclaim space
+
+##Task 1: Reclaim space (as cloud operator)
+> In this task, you will:
+> - Manually reclaim space to trigger cleanup process
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the Dashboard click **local** in **Region management** list
+- [] On the **local** blade, click **Storage accounts**, then click **Reclaim space**, then click **OK**
+
+> [!KNOWLEDGE] **Reclaim space** process will force garbage collection of all deleted storage accounts, regardless of the retention period setting
+
+> **Result:**
+> After completing this exercise, you have manually triggered garbage collection by clicking **Reclaim space** button
+
+
+===
+
+#Lab 08 - Monitor Health and Alerts in Azure Stack
+
+##^[**Objectives and Summary**][lab08-os]
+
+> [lab08-os]:
+> ###Introduction
+>> Azure Stack includes infrastructure monitoring capabilities that enable you to view health and alerts for an Azure Stack region. Health and alerts are managed by the Health resource provider. Azure Stack infrastructure components register with the Health resource provider during Azure Stack deployment and configuration. This registration enables the display of health and alerts for each component.
+>
+> ###Objectives
+>> In this lab, you will:
+> Monitor health and alerts of local Azure Stack components. Furthermore you will also establish a remote session to privileged endpoint to run tests on Azure Stack.
+>
+> ###Prerequisites
+>> No prerequisites
+>
+> ###Variables
+>> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>>
+>> Following scheme stands for password you have assigned to **Administrator**. Same password is used for *AZURESTACK\AzureStackAdmin*, and *AZURESTACK\CloudAdmin* which will be used on Azure Stack development kit. These are AZURESTACK domain identities that may be used to logon Azure VM.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>
+> ###Estimated time to complete this lab
+>> **15 Minutes**
+>
+
+
+===
+#Lab 08 - Exercise #1 - View Health and Alerts
+> In this exercise, you will act as cloud operator to monitor health and alerts of local Azure Stack.
+
+##Task 1: View Health 
+> In this task, you will:
+> - view health of local region
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the Dashboard click **local** in **Region management** list
+
+!IMAGE[image8_1.jpg](image8_1.jpg)
+
+> [!KNOWLEDGE] The Region management tile, pinned by default in the administrator portal for the Default Provider Subscription, lists all the deployed regions of Azure Stack. The tile shows the number of active critical and warning alerts for each region and is your entry point into the health and alert functionality of Azure Stack.
+
+!IMAGE[image8_2.jpg](image8_2.jpg)
+
+- [] On the **local** blade, click **Resource providers**, then click **Storage** to view more detailed information.
+
+> [!KNOWLEDGE] You can click a resource provider or infrastructure role to view more detailed information. If you click an infrastructure role, and then click the role instance, there are options to Start, Restart, or Shutdown. Do not use these actions when you apply updates to an integrated system. Also, do not use these options in an Azure Stack Development Kit environment. These options are designed only for an integrated systems environment, where there is more than one role instance per infrastructure role. Restarting a role instance (especially AzS-Xrp01) in the development kit causes system instability.
+
+##Task 2: View Alerts
+> In this task, you will:
+> - View alerts for the local region
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the Dashboard click **local** in **Region management** list
+
+> [!KNOWLEDGE] The list of active alerts for each Azure Stack region is available directly from the Region management blade. The first tile in the default configuration is the Alerts tile, which displays a summary of the critical and warning alerts for the region.
+
+!IMAGE[image8_3.jpg](image8_3.jpg)
+
+- [] Click on top part of the Alerts tile to view list of all active alerts.
+
+!IMAGE[image8_4.jpg](image8_4.jpg)
+
+> [!KNOWLEDGE] By selecting the top part of the Alerts tile, you navigate to the list of all active alerts for the region. If you select either the Critical or Warning line item within the tile, you navigate to a filtered list of alerts (Critical or Warning).
+
+##Task 3: View the public IP address usage information
+> In this task, you will:
+> view the total number of public IP addresses that have been consumed in the region
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- []In the Azure Stack administrator portal, click **More services**, under **Administrative Resources**, click **Resource providers**.
+- [] From the list of Resource Providers, select **Network**.
+- [] The **Network** blade displays the **Public IP pools usage** tile in the **Overview** section.
+
+!IMAGE[image8_5.jpg](image8_5.jpg)
+
+##Task 4: Find a storage account
+> In this task, you will:
+> view list of all storage accounts
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the Dashboard click **local** in **Region management** list
+- [] Select **Storage** from the **Resource Providers** list.
+- [] Now, on the storage Resource Provider administrator blade – scroll down to the **Storage accounts** tab and click it.
+
+> The resulting page is the list of storage accounts in that region.
+
+===
+#Lab 08 - Exercise #2 - Using the privileged endpoint in Azure Stack
+> In this exercise, you will logon to the privileged endpoint and test Azure Stack health
+
+> [!KNOWLEDGE] As an Azure Stack operator, you should use the administrator portal, PowerShell, or Azure Resource Manager APIs for most day-to-day management tasks. However, for some less common operations, you need to use the privileged endpoint (PEP). The PEP is a pre-configured remote PowerShell console that provides you with just enough capabilities to help you perform a required task. You access the PEP through a remote PowerShell session on the virtual machine that hosts the PEP. In the ASDK, this virtual machine is named AzS-ERCS01. If you’re using an integrated system, there are three instances of the PEP, each running inside a virtual machine (Prefix-ERCS01, Prefix-ERCS02, or Prefix-ERCS03) on different hosts for resiliency.
+
+##Task 1: Login to Privileged Endpoint
+> In this task, you will:
+> - Establish a remote sesssion to privileged endpoint
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open an elevated Windows Powershell session.
+- [] Run following command to add PEP as a trusted host.
+
+```PowerShell
+winrm s winrm/config/client '@{TrustedHosts="azs-ercs01"}'
+```
+- [] Run following command in the same elevated Windows Powershell session to establish a remote session;
+    
+```PowerShell
+$cred = Get-Credential
+ Enter-PSSession -ComputerName azs-ercs01 -ConfigurationName PrivilegedEndpoint -Credential $cred
+```
+>When prompted, use the following credentials:
+>
+>User name: **AZURESTACK\AzureStackAdmin**
+>
+>Password: **@lab.VirtualMachine(55267).Password**
+
+> [!KNOWLEDGE] You can validate the status of your Azure Stack. When you have an issue, contact Microsoft Customer Services Support. Support asks you to run Test-AzureStack from your management node. The validation test isolates the failure. Support can then analyze the detailed logs, focus on the area where the error occurred, and work with you in resolving the issue.
+
+- [] Run following command in the same elevated Windows Powershell session to test Azure Stack;
+
+```PowerShell
+Test-AzureStack
+```
+> [!KNOWLEDGE] If any tests report fail, run: Get-AzureStackLog -FilterByRole "rolename" -OutputPath "Log output path". The cmdlet gathers the logs from Test-AzureStack
+!IMAGE[5px64167.jpg](5px64167.jpg)
+
+
+> **Result:**
+> After completing this exercise, 
+
+===
+
+#Lab 09 - Working with SQL Resource Provider
+
+##^[**Objectives and Summary**][lab09-os]
+
+> [lab09-os]:
+> ###Introduction
+>> Use the SQL Server resource provider adapter to expose SQL databases as a service of Azure Stack. After you install the resource provider and connect it to one or more SQL Server instances, you and your users can create:
+> - Databases for cloud-native apps.
+> - Websites that are based on SQL.
+> - Workloads that are based on SQL. You don't have to provision a virtual machine (VM) that hosts SQL Server each time.
+>
+> ###Objectives
+>> In this lab, you will:
+> - Install Azure Stack SQL Resource Provider
+> - Install SQL Server
+> - Configure SQL server as SQL Hosting Server
+> - Create a database as a tenant
+>
+> ###Prerequisites
+>>> [!ALERT] In order to successfuly complete this lab **Lab 01**, **Lab 02**, and **Lab 03** must be completed.
+>
+> ###Variables
+>> Azure Stack Administrator password, Azure Active Directory Identity will be used to logon Azure and Azure Stack portals.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>>
+>> Following scheme stands for password you have assigned to **Administrator**. Same password is used for *AZURESTACK\AzureStackAdmin*, and *AZURESTACK\CloudAdmin* which will be used on Azure Stack development kit. These are AZURESTACK domain identities that may be used to logon Azure VM.
+>>
+>>  **@lab.VirtualMachine(55267).Username**
+>> 
+>
+> ###Estimated time to complete this lab
+>> **30 Minutes**
+>
+
+
+===
+
+#Lab 09 - Exercise #1 - Install SQL Resource Provider and Configure Quotas
+> In this exercise, you will learn how to install SQL Resource Provider in ASDK.
+
+##Task 1: Get ASDK Version
+> In this task, you will:
+> - find out ASDK version
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open an elevated Windows Powershell session.
+
+- [] Run following command to find out ASDK version;
+    
+```PowerShell
+$cred = Get-Credential
+$session = New-PSSession -ComputerName AzS-ERCS01 -ConfigurationName PrivilegedEndpoint -Credential $cred
+$stamp = Invoke-Command -Session $session -ScriptBlock {Get-AzureStackStampInformation}
+$stamp.StampVersion 
+```
+> When prompted, use the following credentials:
+> - User name: **AZURESTACK\AzureStackAdmin**
+> - Password: **@lab.VirtualMachine(55267).Password**
+
+##Task 2: Download and Install SQL Resource Provider
+> In this task, you will:
+> - download and install the SQL resource provider
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In an internet browser, navigate to https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-sql-resource-provider-deploy
+- [] Find relevant RP matching Azure Stack DevKit version and download the file to **C:\AzureStackOnAzureVM** folder.
+
+> You may need to enable file download on IE Internet Sites.
+
+- [] Open **File Explorer** and navigate to **C:\AzureStackOnAzureVM** folder.
+- [] Right click and go to properties of the downloaded file.
+- [] **Unblock** the file.
+- [] Double click on the downloaded file and extract it to **c:\AzureStackOnAzureVM\SQLRP**
+- [] Click **Start** menu
+- [] Search and run **PowerShell ISE** as **Administrator**.
+- [] Copy & paste the below script to a new file and replace **< >** fields between brackets with the values represent your environment.
+
+```PowerShell
+# Use the NetBIOS name for the Azure Stack domain. On ASDK, the default is AzureStack and the default prefix is AzS
+$domain = "AzureStack"
+$prefix = "AzS"
+$privilegedEndpoint = "$prefix-ERCS01"
+	 
+# Point to the directory where the RP installation files were extracted
+$tempDir = 'C:\azurestackonazurevm\SQLRP'
+	 
+# The service admin account (can be AAD or ADFS)
+$serviceAdmin =  "@lab.UserFirstName@<\tenant name>.onmicrosoft.com"
+$AdminPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force
+$AdminCreds = New-Object System.Management.Automation.PSCredential ($serviceAdmin, $AdminPass)
+	 
+# Set credentials for the new Resource Provider VM
+$vmLocalAdminPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force
+$vmLocalAdminCreds = New-Object System.Management.Automation.PSCredential ("sqlrpadmin", $vmLocalAdminPass)
+	 
+# and the cloudadmin credential required for Privileged Endpoint access
+$CloudAdminPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force
+$CloudAdminCreds = New-Object System.Management.Automation.PSCredential ("$domain\cloudadmin", $CloudAdminPass)
+	 
+# change the following as appropriate
+$PfxPass = ConvertTo-SecureString "@lab.VirtualMachine(55267).Password" -AsPlainText -Force
+
+# Change directory to the folder where you extracted the installation files
+# and adjust the endpoints
+$tempDir\DeploySQLProvider.ps1 -AzCredential $AdminCreds -VMLocalCredential $vmLocalAdminCreds -CloudAdminCredential $cloudAdminCreds -PrivilegedEndpoint $privilegedEndpoint -DefaultSSLCertificatePassword $PfxPass -DependencyFilesLocalPath $tempDir\cert
+
+```
+
+##Task 3: Create SQL Adapter Quota and SKU
+> In this task, you will:
+> - learn how to configure SQL Adapter Quota and SKU
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **More Services**
+- [] Search for **SQL Adapter**, select it.
+- [] Under **Settings** blade select **Quota**
+- [] Click **New**
+- [] On the **bladename** blade, **STEP 1 - stepname** specify the following information:
+
+    > - Quota Name: **SQLQuota_1**
+    > - Maximum size for all databases (GB): **1**
+    > - Maximum number of databases: **2**
+
+- [] Click **Create**
+- [] Under **Settings** blade select **SKUs**
+- [] Click **New**
+- [] On the **bladename** blade, **STEP 1 - stepname** specify the following information:
+
+    > - Name: **SQLSKU_1**
+    > - Family: **SQL Server 2016**
+    > - Tier: **Standalone**
+    > - Edition: **Enterprise**
+
+- [] Click **Create**
+
+
+===
+
+#Lab 09 - Exercise #2 - Install SQL Hosting Servers
+
+##Task 1: Install SQL Server
+> In this task, you will:
+> - install SQL server
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **ServiceName (SQL)**
+- [] On the **Create Virtual Machine** blade, **STEP 1 - Basics** specify the following information:
+	    
+	> - Name: **sqlhosting**
+	> - User name: **localadm**
+	> - Password: **@lab.VirtualMachine(55267).Password**
+	> - Subscription: **leave as is**
+	> - Resource group: select **Create new**
+	> - Resource group name: **rgSQL**
+	> - Location: **local**
+
+ - [] On the **Create Virtual Machine** blade, **STEP 2 - Size** specify the following information:
+
+	> - Select VM Size **DS1v2**
+	
+ - [] On the **Create Virtual Machine** blade, **STEP 3 - Settings** specify the following information:
+
+	> - Review and accept the default settings and continue
+
+- [] On the **Create Virtual Machine** blade, **STEP 4 - SQL Server Settings** specify the following information:
+
+	> - SQL connectivity: **Public (Internet)**
+	> - Port: **1433**
+	> - SQL Authentication: **Enable**
+	> - Login name: **localsa**
+	> - Password: **@lab.VirtualMachine(55267).Password**
+	
+- [] On the **Create Virtual Machine** blade, **STEP 5 - Summary** specify the following information:
+	> - Verify and click **OK**
+
+> - Wait for deployment to finish, this may take some time.
+
+> - Once the Server deployment finishes go to the **Virtual Machine** settings and make note of **public IP address** of the server.
+
+- [] In the Resource Groups blade select the newly created resource group **rgSQL**.
+- [] In the Overview blade select the Public IP address resource for the Virtual machine **sqlhosting-ip**.
+- [] Make note of the public IP address.
+
+
+##Task 2: Configure SQL Server as SQL Hosting Server
+> In this task, you will:
+> - configure SQL servers as SQL Hosting Servers
+
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **More Services**
+- [] Search for **SQL Hosting Servers**,  and select it.
+- [] On the **Add a SQL Hosting Server** blade, specify the following information:
+
+	> - SQL Server Name: **sqlhosting-ip** from task 1.
+	> - User name: **localsa**
+	> - Password: **@lab.VirtualMachine(55267).Password**
+	> - Size of Hosting Server in GB: **5**
+	> - Subscription: **leave as is**
+	> - Resource group: select **Use existing**
+	> - Resource group name: **rgSQL**
+	> - Location: **local**
+	> - SKUs: Select **SQLSKU_1**
+	
+##Task 3: Add SQL Adapter service to the plan
+> In this task, you will:
+> - make SQLAdapter available to the already existing plan for tenants to consume.
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser
+
+- [] Logon [Azure Stack Admin Portal][azurestack-adminportal] using following information;
+    
+    > - Username: **@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Plans**
+- [] Under Plans blade select **Plan name**
+- [] Select **Services and quotas** on the new blade.
+- [] Click **Add**
+- [] Click on **Services** and select **Microsoft.SQLAdapter**
+- [] Click **OK**
+- [] Click **Quotas** and select **SQLQuota_1**
+- [] Click **OK** twice
+
+
+===
+
+#Lab 09 - Exercise #3 - Create SQL Database
+
+##Task 1: Create a SQL database
+> In this task, you will:
+> - create a SQL database as a tenant
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] On the **Add Resource Group** blade, specify the following information:
+
+	> - Resource group name: **rgSQLDB**
+	> - Subscription: **leave as is** 
+	> - Resource group location: **local**
+	
+- [] Under Resource Groups blade select the newly created resource group **rgSQLDB**
+- [] Click **Add** on the Resource Blade
+- [] Find **SQL Database** and select it.
+- [] On the **Create Database** blade, specify the following information:
+
+	> - Database name: **db01**
+	> - Collation: **SQL_Latin1_General_CP1_CI_AS**
+	> - Max Size in MB: **512**
+	> - Subscription: **leave as is**
+	> - Resource group: select **Use existing**
+	> - Resource group name: **rgSQLDB**
+	> - Location: **local**
+	> - SKU: Select **SQLSKU_1**
+	> - Login: **Create a new database login**
+	> - Database login: **dbuser01**
+	> - Password: **@lab.VirtualMachine(55267).Password**
+	
+##Task 2: Validate the SQL database
+> In this task, you will:
+> - Validate the previously created SQL database
+
+- [] Logon Azure Stack host VM with RDP client using following information;
+    
+    > - Username: **AZURESTACK\AzureStackAdmin**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] Within Azure Stack host VM (Azs-Host1), open a browser **(InPrivate/Incognito)**
+
+- [] Logon [Azure Stack Tenant Portal][azurestack-tenantportal] using following information;
+    
+    > - Username: **tenantuser@<\tenant_name>.onmicrosoft.com**
+    > - Password: **@lab.VirtualMachine(55267).Password**
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
+- [] Select **rgSQLDB**
+
+> You should see two resources inside this resource group labelled **db01** for the SQL Database and **dbuser01** for SQL Login.
+
+
+
+
+
+===
 #References
 [lab01-e1-rl]:https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-deploy
 [lab01-e2-rl]:https://docs.microsoft.com/en-us/azure/azure-stack/azure-stack-deploy
@@ -1455,235 +2277,3 @@ Update-AzureRmVmss -ResourceGroupName $vmss.ResourceGroupName -Name $vmss.Name -
 [github-repo]:https://github.com/yagmurs/AzureStack-VM-PoC "https://github.com/yagmurs/AzureStack-VM-PoC"
 [github-repo-deploytoazure]:https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fyagmurs%2FAzureStack-VM-PoC%2Fmaster%2Fazuredeploy.json "Deploy to Azure"
 [github-azurestackquicktemplates]:https://github.com/Azure/AzureStack-QuickStart-Templates "https://github.com/Azure/AzureStack-QuickStart-Templates"
-
-===
-
-#Lab xx
-
-##^[**Objectives and Summary**][labxx-os]
-
-> [labxx-os]:
-###Introduction
-###Objectives
-###Prerequisites
-###Variables
-###Estimated time to complete this lab
-###Scenario
-
-===
-
-#Lab xx - Exercise #1
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-[Reference Document][labxx-e1-rl]
-
-===
-
-#Lab xx - Exercise #2
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-
-[Reference Document][labxx-e2-rl]
-
-===
-
-#Lab xx - Exercise #3
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-
-[Reference Document][labxx-e3-rl]
-
-===
-
-#Lab xx - Exercise #4
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-[Reference Document][labxx-e4-rl]
-
-===
-
-#Lab xx - Exercise #5
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-[Reference Document][labxx-e5-rl]
-
-===
-
-#Lab xx - Exercise #6
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-[Reference Document][labxx-e6-rl]
-
-===
-
-#Lab xx - Exercise #7
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-- [] 
-
-[Reference Document][labxx-e7-rl]
-
-===
-
-##Lab Variables
-
-**@lab.UserFirstName@<\tenant_name>.onmicrosoft.com**
-
-**@lab.VirtualMachine(55267).Password**
-
-@lab.LabInstanceId	The unique ID of the running lab instance.
-
-@lab.GlobalLabInstanceId	The globally unique ID of the running lab instance.
-
-@lab.LabProfileId	The unique ID of the lab profile.
-
-@lab.UserId	The unique ID of user running the lab.
-
-@lab.UserFirstName	The first name of the user running the lab.
-
-@lab.UserLastName	The last name of the user running the lab.
-
-@lab.UserEmail	The e-mail address of the user running the lab.
-
-@lab.UserExternalId	The external ID of the user running the lab (if launched via API).
-
-@lab.Tag	The tag associated with the lab instance (if specified when launched via API).
-
-@lab.VirtualMachine(55059).SelectLink	A link to select the Client01 - Windows 10 1709 virtual machine.
-
-@lab.VirtualMachine(55059).Username	Username for signing into the Client01 - Windows 10 1709 virtual machine.
-
-@lab.VirtualMachine(55059).Password	Password for signing into the Client01 - Windows 10 1709 virtual machine.
-
-===
