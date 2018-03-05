@@ -64,9 +64,6 @@ Click **Next** to advance to [**Table of content**](#toc) window
 >[**Lab 07**](#lab07)
 -   [Exercise 1](#lab07e1)
 -   [Exercise 2](#lab07e2)
--   [Exercise 3](#lab07e3)
--   [Exercise 4](#lab07e4)
--   [Exercise 5](#lab07e5)
 
 >[**Lab 08**](#lab08)
 -   [Exercise 1](#lab08e1)
@@ -117,7 +114,7 @@ Click **Next** to advance to [**LAB 01**](#lab01) window
 >>> [!ALERT] There are no prerequisites for this lab
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **6 Hours**
@@ -277,7 +274,7 @@ Click **Next** to advance to [**LAB 01 - Exercise 2**](#lab01e2) window
 
 - [] In the @[Azure Portal][azure-portal], click **More services**, and then **Virtual Machines**
 
-- [] On **Virtual Machines** blade, *right click* on created VM **AzS-Host1** > click **Connect**
+- [] On the **Virtual Machines** blade, *right click* on created VM **AzS-Host1** > click **Connect**
 
 - [] Logon Azure Stack host VM with @[RDP][rdp] client using following information;
     
@@ -347,27 +344,32 @@ Click **Next** to advance to [**LAB 01 - Exercise 3**](#lab01e3) window
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] On Main menu click **+New** > **Offers + Plans** and examine the Offers, Plans and Quotas
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Offers + Plans** blade, examine the Offers, Plans and Quotas
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Offers + Plans** blade 
-
-- [] On Main menu click **+New** > **Compute**. Notice that there are only two items yet, **Availability Set** and **Storage Account**
-
-    > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
-
-- [] On Main menu click **+New** > **Data + Storage** and examine.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Compute** blade, notice that there are only two items yet, **Availability Set** and **Storage Account**
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
 
-- [] On Main menu click **+New** > **Networking** and examine.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Data + Storage** blade, examine options.
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
 
-- [] On Main menu click **+New** > **Security + Identity** and examine.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Networking** blade, examine options.
+
+    > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Security + Identity** blade, examine options.
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade
 
-- [] On Main menu click **+New** > **Capacity** and examine.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Capacity** blade, examine options.
 
     > [!NOTE] Do not set up any of them yet, we will be configuring later. Close **Compute** blade 
 
@@ -378,7 +380,8 @@ Click **Next** to advance to [**LAB 01 - Exercise 3**](#lab01e3) window
 
 > [!KNOWLEDGE] Notice that background color has been changed to Blue from Grey, meaning you are logged on as a normal tenant, you do not have administrative rights. Most of the items are missing like **Marketplace Management**, **Plans**, **Offers** 
 
-- [] On Main menu click **+New** and examine new options as you’ve done on admin portal. 
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **+New**
+- [] Examine all options as you’ve done on admin portal. 
 
 When you try to create any of the items notice that it’s asked you to **Sign up for a new Subscription**.
 
@@ -625,7 +628,7 @@ Click **Next** to advance to [**LAB 02 - Objectives and Summary**](#lab02) windo
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01**](#lab01) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **30 minutes**
@@ -722,7 +725,7 @@ Click **Next** to advance to [**LAB 03 - Objetives and Summary**](#lab03) window
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), and [**Lab 02**](#lab02) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **60 minutes**
@@ -1182,7 +1185,7 @@ Click **Next** to advance to [**LAB 04 - Objectives and Summary**](#lab04) windo
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), and [**Lab 02**](#lab02) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **20 minutes**
@@ -1376,7 +1379,7 @@ Click **Next** to advance to [**LAB 05 - Objectives and Summary**](#lab05) windo
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), [**Lab 02**](#lab02), and [**Lab 03**](#lab03) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **60 Minutes**
@@ -1715,7 +1718,7 @@ Click **Next** to advance to [**LAB 06 - Objectives and Summary**](#lab06) windo
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), [**Lab 02**](#lab02), and [**Lab 03**](#lab03) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **30 Minutes**
@@ -1916,37 +1919,31 @@ Click **Next** to advance to [**LAB 07 - Objectives and Summary**](#lab07) windo
 
 ---
 
-#Lab 07 - 
+#Lab 07 - Configuring Azure Stack Infrastructure Backup
 
 ##^[**Objectives and Summary**][lab07-os]
 
 > [lab07-os]:
 > ###Introduction
->> This Lab covers basic operations with storage accounts, such as creation, deletion and restoration of such resources.
+>> This Lab covers basic operations to enable the Infrastructure Backup Service through the administration portal so that Azure Stack can generate backups.
 >
 > ###Objectives
 > In this lab, you will:
-> - Enable Retention Policy
-> - Create a new resource group
-> - Create a new storage account
-> - Delete a storage account
-> - Recover a deleted storage account
-> - Confirm storage account recovery
-> - Reclaim space
+> - Configure Azure Stack infrastructure backup 
+> -	Download and describe Azure Stack infrastructure Windows PowerShell cmdlets
+
 >
 > ###Prerequisites
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), [**Lab 02**](#lab02), and [**Lab 03**](#lab03) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
->> **30 Minutes**
+>> **45 Minutes**
 >
 > ###Scenario
->> Enable Retention policy for storage accounts in Azure Stack using Admin Portal via Cloud Admin account.
-Afterwards logon to your tenant and create a new resource group, and storage account under this resource group. Delete the same storage account to test retention policy.
-Login back to the Admin Portal and recover said storage account and validate that it is restored.
+>> In order to enable the Infrastructure Backup Service through the administration portal you will create a dedicated backup user, file share and encrtption key so that Azure Stack can generate backups.
 
 ---
 
@@ -1965,76 +1962,113 @@ Click **Next** to advance to [**LAB 07 - Exercise 1**](#lab07e1) window
 
 ---
 
-#Lab 07 - Exercise 1 - 
-> In this exercise, you will act as cloud operator to configure retention policy, recover storage account,
-and act as a tenant user to create, delete storage account, and confirm recovery of the storage account:
-> - Enable Retention Policy
-> - Create a new resource group
-> - Create a new storage account
-> - Delete a storage account
-> - Recover a deleted storage account
-> - Confirm storage account recovery
+#Lab 07 - Exercise 1 - Configure Azure Stack infrastructure backup
+> In this exercise, you will act as cloud operator to:
+> - Create a backup user
+> - Create a backup share
+> - Generate an encryption key
+> - Configure backup controller
 
-##Task 1: 
+##Task 1: Create a backup user
 > In this task, you will:
-> - Change retention policy settings
+> - Create a backup user
 
 !INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
+
+- [] Click **Start**, in the **Start menu**, expand the **Windows Administrative Tools** folder, and click **Active Directory Administrative Center**  
+- [] In ** Active Directory Administrative Center** , click **azurestack (local)**  and, in the main window pane, click the **Users** container
+- [] In the **Tasks** pane, in the **Users** section, click **New** and then click **User**
+- [] In the **Create User** window, specify the following settings
+
+    |||
+    |:---|:---|
+    |Full name| +++**AzS-BackupUser**+++|
+    |User UPN logon| +++**AzS-BackupUser@azurestack.local**+++|
+    |User SamAccountName logon| +++**AZURESTACK\AzS-BackupUser**+++|
+    |Password|+++**@lab.VirtualMachine(55267).Password**+++|
+    |Password options|Password never expires|
+
+- []  Click **OK**
+
+##Task 2: Create a backup share
+> In this task, you will:
+> - Create a backup share.
+
+> [!KNOWLEDGE] In non-lab scenarios, this share would be external to the Azure Stack deployment. In this lab, for the simplicity sake, you will create it directly on the Azure Stack host.
+
+!INSTRUCTIONS[][rdp-logon]
+
+- [] Start File Explorer 
+- [] In File Explorer, create a new folder C:\Backup
+- [] Right-click **Backup** and, in the right-click menu, click **Properties**
+- [] In the **Backup Properties** window, click the **Sharing** tab and then click **Advanced Sharing**
+- [] In the **Advanced Sharing** dialog box, click **Share this folder** and then click **Permissions**
+- [] In the **Permissions for Backup** window, ensure that the **Everyone** entry is selected and then click **Remove**
+- [] Click **Add**, in the **Select Users, Computers, Service Accounts, or Groups** dialog box, type +++**AzS-BackupUser**+++
+- [] Click **OK**
+- [] Ensure that the **AzS-BackupOperator** entry is selected and click the **Full Control** checkbox in the **Allow** column
+- [] Click **Add**, in the **Select Users, Computers, Service Accounts, or Groups** dialog box, click **Locations** 
+- [] In the Locations dialog box, click the entry representing the local computer
+- [] Click **OK**
+- [] In the **Enter the object names to select** text box, type **Administrators**
+- [] Click **OK**
+- [] Ensure that the **Administrators** entry is selected and click the **Full Control** checkbox in the **Allow** column
+- [] Click **OK**
+- [] Back in the **Advanced Sharing** dialog box, click **OK**
+- [] Back in the **Backup Properties** window, click the **Security** tab 
+- [] Click **Edit**
+- [] In the **Permissions for Backup** dialog box, Click **Add**
+- [] In the **Enter the object names to select** text box, type +++**AzS-BackupUser**+++ and click **OK**
+- [] In the **Permissions for AzS-BackupUser** pane, click **Full Control** in the **Allow** column and then click **OK**
+- [] Back in the **Backup Properties** window, click **Close**
+
+##Task 3: Generate an encryption key
+> In this task, you will:
+> - Generate an encryption key. All infrastructure backups must be encrypted – so to configure an infrastructure backup you must provide an encryption key. You will use a Windows PowerShell script to accomplish this.
+
+!INSTRUCTIONS[][rdp-logon]
+
+- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+
+```PowerShell
+$tempEncryptionKeyString = ""
+ 
+foreach ($i in 1..64) {
+	$tempEncryptionKeyString += -join ((65..90) + (97..122) | 
+Get-Random | 
+% {[char]$_})
+}
+ 
+$tempEncryptionKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($tempEncryptionKeyString)
+$BackupEncryptionKeyBase64 = [System.Convert]::ToBase64STring($tempEncryptionKeyBytes)
+$BackupEncryptionKeyBase64
+```
+
+> [!KNOWLEDGE] The value generated by the script. This is the encryption key you will use when configuring backups. You should store it securely since the knowledge of the encryption key is necessary when performing cloud recovery.
+
+##Task 4: Configure backup controller
+> In this task, you will:
+> - Configure backup controller
+
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **More services**
+- [] In the **OTHER** section, click **Infrastructure backup**
+- [] On the **Infrastructure backup** blade, click **Configuration**
+- [] On the **Backup Controller Settings** blade, specify the following settings
 
-##Task 2: 
-> In this task, you will:
-> - Create a new resource group and a new storage account to be prepared upcoming lab exercises
+    |||
+    |:---|:---|
+    |Backup storage location| +++**\\\AzS-HOST.azurestack.local\Backup\AzSBackups\azurestack.local\local**+++|
+    |Username| +++**AzS-BackupUser@azurestack.local**+++|
+    |Password| +++**@lab.VirtualMachine(55267).Password**+++|
+    |Encryption Key| paste here the value of the encryption key you generated in the previous task|
 
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
-
-- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
-
-> [!ALERT] Wait for the deployment to complete. This should take just a few seconds
-
-##Task 3: 
-> In this task, you will:
-> - Delete a storage account to demostrate how to recover storage account on upcoming lab exercises
-
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
-
-- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource Groups**
-
-
-##Task 4: 
-> In this task, you will:
-> - Recover a deleted storage account on previous lab exercise
-
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
-
-- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
-
-##Task 5: 
-> In this task, you will:
-> - Confirm recovered storage account
-
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
-
-- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **Resource groups**
+- [] Click **OK**
 
 > **Result:**
-> After completing this exercise, you have configured retention policy, deletes storage account, and recovered storage account
+> After completing this exercise, you have created a share that will host Azure Stack infrastructure backups and an Active Directory user account that will be used by the Azure Stack infrastructure backup to connect to that share, generated an encryption key, and configured backup controller.
 
 ---
 
@@ -2053,23 +2087,34 @@ Click **Next** to advance to [**LAB 07 - Exercise 2**](#lab07e2) window
 
 ---
 
-#Lab 07 - Exercise 2 - 
-> In this exercise, you will act as a cloud operator and manually reclaim space to trigger cleanup process:
-> - Reclaim space
+#Lab 07 - Exercise 2 - review Azure Stack infrastructure backup Windows PowerShell cmdlets
+> In this exercise, you will download and review Azure Stack infrastructure backup Windows PowerShell cmdlets:
+> - Review Azure Stack infrastructure backup cmdlets
 
-##Task 1: 
+##Task 1: Review Azure Stack infrastructure backup cmdlets
 > In this task, you will:
-> - Manually reclaim space to trigger cleanup process
+> - Connect to Azure Stack by using Windows PowerShell and review Azure Stack infrastructure backup cmdlets
 
 !INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
+- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+
+```PowerShell
+#Variables
+$defaultLocalPath = "C:\AzureStackOnAzureVM"
+ 
+cd\
+cd $defaultLocalPath
+cd AzureStack-Tools-master
+
+Import-Module –Name .\Infrastructure\AzureStack.Infra.psm1
+Get-Command –Name "*backup*" –Module AzureStack.Infra
+```
+> [!KNOWLEDGE] The listing contains **Start-AzsBackup** and **Restore-AzsBackup**. Running the first of these cmdlets at this point would initiate infrastructure backup using the settings you configured in the previous exercise. The second cmdlet would be used during cloud recovery.
+
 
 > **Result:**
-> After completing this exercise, you have manually triggered garbage collection by clicking **Reclaim space** button
+> After completing this exercise, you have imported and reviewed Azure Stack infrastructure backup Windows PowerShell cmdlets.
 
 ---
 
@@ -2105,7 +2150,7 @@ Click **Next** to advance to [**LAB 08 - Objectives and Summary**](#lab08) windo
 >> No prerequisites
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **15 Minutes**
@@ -2298,7 +2343,7 @@ Click **Next** to advance to [**LAB 09 - Objectives and Summary**](#lab09) windo
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), [**Lab 02**](#lab02), and [**Lab 03**](#lab03) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **30 Minutes**
@@ -2527,7 +2572,7 @@ Click **Next** to advance to [**LAB 09 - Exercise 2**](#lab09e2) window
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
 - [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Plans**
-- [] Under Plans blade select **Plan name**
+- [] Under Plans blade select **co-services-plan**
 - [] Select **Services and quotas** on the new blade.
 - [] Click **Add**
 - [] Click on **Services** and select **Microsoft.SQLAdapter**
@@ -2625,7 +2670,7 @@ Click **Next** to advance to [**LAB 10**](#lab10) window
 
 ---
 
-#Lab 10 - 
+#Lab 10 - Add an App Service resource provider to Azure Stack
 
 ##^[**Objectives and Summary**][lab10-os]
 
@@ -2643,7 +2688,7 @@ Click **Next** to advance to [**LAB 10**](#lab10) window
 >>> [!ALERT] In order to successfuly complete this lab [**Lab 01](#lab01), [**Lab 02**](#lab02), [**Lab 03**](#lab03), [**Lab 04**](#lab04), and [**Lab 09**](#lab09) must be completed.
 >
 > ###Variables
->>!INSTRUCTIONS[][variables]
+>> !INSTRUCTIONS[][variables]
 >
 > ###Estimated time to complete this lab
 >> **4 Hours**
@@ -2868,9 +2913,9 @@ Cd $defaultLocalPath\AppServiceHelperScripts
 |||
 |:---|:---|
 |App Service default SSL certificate| **_.appservice.local.azurestack.external.pfx**|
-|App Service API SSL certificate| **Api.appservice.local.azurestack.external.pfx**|
+|App Service API SSL certificate| **api.appservice.local.azurestack.external.pfx**|
 |App Service publisher SSL certificate| **ftp.appservice.local.azurestack.external.pfx**|
-|App Service identity application certificate| **Sso.appservice.local.azurestack.external.pfx**|
+|App Service identity application certificate| **sso.appservice.local.azurestack.external.pfx**|
 
 !IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e3-i1.png)
 
@@ -2974,48 +3019,179 @@ Click **Next** to advance to [**LAB 10 - Exercise 4**](#lab10e4) window
 
 ---
 
-#Lab 10 - Exercise 4 - 
+#Lab 10 - Exercise 4 - App Service Resource Provider Installation
 > In this exercise, you will act as a cloud operator and:
-> - Download and extract the App Service on Azure Stack deployment helper scripts.
-> - Download the App Service on Azure Stack installer.
+> - Install App Service Resource Provider
+> - Validate App Service Resource Provider installation status
 
-##Task 1: 
+##Task 1: Run App Service installer
 > In this task, you will you will act as a cloud operator and:
-> - Download and extract the App Service on Azure Stack deployment helper scripts.
+> - Install App Service Resource Provider
 
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+- [] Within Azure Stack host VM (Azs-Host1), go to **C:\AzureStackOnAzureVM** on File Explorer
+- [] Run **C:\AzureStackOnAzureVM\AppService.exe** as administrator. 
+- [] Click **Deploy App Service on your Azure Stack cloud.**
 
-```PowerShell
-#Download and extract AppServiceHelperScripts
-$defaultLocalPath = "C:\AzureStackonAzureVM"
-Invoke-WebRequest -Uri "https://aka.ms/appsvconmashelpers" -OutFile "$defaultLocalPath\AppServiceHelperScripts.zip"
-Expand-Archive -Path "$defaultLocalPath\AppServiceHelperScripts.zip" -DestinationPath "$defaultLocalPath\AppServiceHelperScripts"
-```
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i1.png)
 
-##Task 2: 
+- [] On the next page, complete following information as shown and replace **< >** fields between brackets with the values represent your environment.
+
+|||
+|:---|:---|
+|Azure Stack Admin ARM Endpoint| +++**adminmanagement.local.azurestack.external**+++|
+|Azure Stack Tenat ARM Endpoint| +++**management.local.azurestack.external**+++|
+|Azure Directory Tenant Name| +++**<\tenant_name>.onmicrosoft.com**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i2.png)
+
+- [] Click **Next >**
+
+- [] On the next page click the **Connect** button next to the Azure Stack Subscriptions box
+- [] A popup Authentication window will appear, complete using following information and Click **Sign In**
+
+>    |||
+>    |---:|:---|
+>    |**Username** |**:** +++@lab.UserFirstName@<\tenant_name>.onmicrosoft.com+++
+>    |**Password** |**:** +++@lab.VirtualMachine(55267).Password+++
+
+- [] In the **Azure Stack Subscriptions** box, select your subscription.
+- [] In the **Azure Stack Locations** box, select **local**
+- [] Default **Resource Group Name** should appear: **appservice.local**
+- [] Default **Storage Account Name** should appear: **appsvclocalstor**
+- [] Click **Next**
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i3.png)
+
+- [] On the next page complete using following information
+
+|||
+|:---|:---|
+|File Share UNC Path| +++**\\\appservicefileserver.local.cloudapp.azurestack.external\websites**+++|
+|File Share Owner| +++**fileshareowner**+++|
+|File Share Owner Password| +++**@lab.VirtualMachine(55267).Password**+++|
+|File Share User| +++**fileshareuser**+++|
+|File Share User Password| +++**@lab.VirtualMachine(55267).Password**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i4.png)
+
+- [] Click **Next >**
+
+- [] On the next page, complete following information as shown and replace **< >** fields between brackets with the values represent your environment.
+
+|||
+|:---|:---|
+|Identity Application ID| **<\Application ID noted on Lab 10 - Exercise 3 - Task 4>**|
+|Identity Application certificate file (*.pfx)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\Sso.appservice.local.azurestack.external.pfx**+++|
+|Identity Application certificate (*.pfx) password| +++**@lab.VirtualMachine(55267).Password**+++|
+|Azure Resoure Manager (ARM) root certificate file (*.cer)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\AzureStackCertificationAuthority.cer**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i5.png)
+
+- [] Click **Next >**
+
+- [] On the next page complete using following information
+
+|||
+|:---|:---|
+|App Service default SSL certificate file (*.pfx)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\_.appservice.local.azurestack.external.pfx**+++|
+|App Service default SSL certificate (*.pfx) password| +++**@lab.VirtualMachine(55267).Password**+++|
+|App Service Api SSL certificate file (*.pfx)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\api.appservice.local.azurestack.external.pfx**+++|
+|App Service Api SSL certificate (*.pfx) password| +++**@lab.VirtualMachine(55267).Password**+++|
+|App Service Publisher SSL certificate file (*.pfx)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\ftp.appservice.local.azurestack.external.pfx**+++|
+|App Service Publisher SSL certificate (*.pfx) password| +++**@lab.VirtualMachine(55267).Password**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i6.png)
+
+- [] Click **Next >**
+
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Virtual Machines**
+- [] On the **Virtual Machines** blade, click **appsvcsql**
+- [] On the **appsvcsql** blade, note ip address under **Public IP address/DNS name label**
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i7.png)
+
+- [] On the next page complete using following information
+
+|||
+|:---|:---|
+|SQL Server name| +++**192.168.102.x**+++|
+|SQL sysadmin login| +++**appsvcsqluser**+++|
+|SQL sysadmin password| +++**@lab.VirtualMachine(55267).Password**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i8.png)
+
+- [] Click **Next >**
+
+- [] On the next page, in the **Select Platform Image** box, select **Windows Server 2016 - latest** virtual machine image
+- [] Click **Next >**
+
+- [] On the next page complete using following information
+
+||||
+|:---|:---:|:---:|
+||Instances|SKUs|
+|Controller Role|1| **Standard_A1**|
+|Management Role|1| **Standard_A2**|
+|Publisher Role|1| **Standard_A1**|
+|FrontEnd Role|1| **Standard_A1**|
+|Shared Worker Role|1| **Standard_A1**|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i9.png)
+
+- [] On the next page complete using following information
+
+|||
+|:---|:---|
+|Worker Role Virtual Machine(s) Admin| +++**workerroleadmin**+++|
+|Worker Role Virtual Machine(s) password| +++**@lab.VirtualMachine(55267).Password**+++|
+|Other Roles Virtual Machine(s) Admin| +++**otherrolesadmin**+++|
+|Other Roles Virtual Machine(s) password| +++**@lab.VirtualMachine(55267).Password**+++|
+|App Service Publisher SSL certificate file (*.pfx)| +++**C:\AzureStackonAzureVM\AppServiceHelperScripts\ftp.appservice.local.azurestack.external.pfx**+++|
+|App Service Publisher SSL certificate (*.pfx) password| +++**@lab.VirtualMachine(55267).Password**+++|
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i10.png)
+
+- [] Click **Next >**
+
+- [] On the next page examine **Summary of selections made**
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i11.png)
+
+- [] Click checkbox **Select and click next to start the deployment**
+
+- [] Click **Next >**
+
+
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i12.png)
+
+
+> [!NOTE] Track the installation progress.
+
+> [!ALERT] This process takes about 1-2 hours to complete
+
+- [] After the installer successfully finishes all the steps, click **Exit**
+
+> [!KNOWLEDGE] Once the App service configuration finished, worker role installation continues in the background for another 1-2 hours to finalize the installation of the components.
+
+##Task 2: Check the App Service installation status
 > In this task, you will you will act as a cloud operator and:
-> - Download the App Service on Azure Stack installer.
+> - Validate App Service Resource Provider installation status
 
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **More Services**, then click **App Service**
+- [] On the **App Service** blade, check to see that the Status shows **All roles are ready**
 
-```PowerShell
-#Download AppService
-$defaultLocalPath = "C:\AzureStackonAzureVM"
-Invoke-WebRequest -Uri "https://aka.ms/appsvconmasinstaller" -OutFile "$defaultLocalPath\AppService.exe"
-```
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab10-e4-i13.png)
+
+> [!ALERT] This process takes about 1-2 hours to complete
 
 > **Result:**
-> After completing this exercise, you have downloaded and extracted the App Service installer and helper scripts before you start installing App Service installation on Azure Stack Development Kit
+> After completing this exercise, you have downloaded and extracted the App Service installer and helper scripts before you start installing App Service installation as a prerequisites. You have also started and validated App Service installation on Azure Stack.
 
 ---
 
@@ -3034,52 +3210,53 @@ Click **Next** to advance to [**LAB 10 - Exercise 5**](#lab10e5) window
 
 ---
 
-#Lab 10 - Exercise 5 - 
-> In this exercise, you will act as a cloud operator and:
-> - Download and extract the App Service on Azure Stack deployment helper scripts.
-> - Download the App Service on Azure Stack installer.
+#Lab 10 - Exercise 5 - Validate Azure App Service
+> In this exercise, you will act as a cloud operator and a tenant:
+> - Make App Service available to the existing plan for tenants to consume
+> - Deploy a Web App to test drive.
 
-##Task 1: 
-> In this task, you will you will act as a cloud operator and:
-> - Download and extract the App Service on Azure Stack deployment helper scripts.
+##Task 1: Add App Service to the plan
+> In this task, you will:
+> - Make App Service available to the already existing plan for tenants to consume
 
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Plans**
+- [] On the **Plans** blade select **co-services-plan**
+- [] Select **Services and quotas** on the new blade.
+- [] Click **Add**
+- [] Click on **Services** and select **Microsoft.Web**
+- [] Click **OK**
+- [] Click **Quotas** and select **Default Quota**
+- [] Click **OK** twice
 
-```PowerShell
-#Download and extract AppServiceHelperScripts
-$defaultLocalPath = "C:\AzureStackonAzureVM"
-Invoke-WebRequest -Uri "https://aka.ms/appsvconmashelpers" -OutFile "$defaultLocalPath\AppServiceHelperScripts.zip"
-Expand-Archive -Path "$defaultLocalPath\AppServiceHelperScripts.zip" -DestinationPath "$defaultLocalPath\AppServiceHelperScripts"
-```
-
-##Task 2: 
-> In this task, you will you will act as a cloud operator and:
-> - Download the App Service on Azure Stack installer.
+##Task 2: Test drive App Service on Azure Stack
+> In this task, you will act as a tenant:
+> - Deploy a Web App to test drive.
 
 !INSTRUCTIONS[][rdp-logon]
 !INSTRUCTIONS[][azurestack-tenantportal-tenantuser-logon]
-!INSTRUCTIONS[][rdp-logon]
-!INSTRUCTIONS[][azurestack-adminportal-globaladmin-logon]
 
-- [] Open PowerShell ISE **Run as an Administrator**. Copy following script to Powershell ISE and run.
+- [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **+New**
+- [] On the **Web + Mobile** blade, click **Web App**
+- [] On the **Web App** blade, type +++**appsvctestapp**+++ in the Web app box.
+- [] Under Resource Group, click **New**. Type +++**appsvctestapprg**+++ in the Resource Group box.
+- [] Click **App Service plan/Location**, 
+- [] On the **App Service plan** blade, click **Create new**
+- [] On the **New App Service Plan** blade, type **appsvcplan1** in the App service plan box
+- [] Select **Free-Shared or Shared-Shared** in the Pricing tier box
+- [] Click **OK**, then click **appsvcplan1**
+- [] Click **Create**
 
-```PowerShell
-#Download AppService
-$defaultLocalPath = "C:\AzureStackonAzureVM"
-Invoke-WebRequest -Uri "https://aka.ms/appsvconmasinstaller" -OutFile "$defaultLocalPath\AppService.exe"
-```
+> [!ALERT] This process takes about few minutes to complete
+
+- [] In the [Azure Stack Tenant Portal][azurestack-tenantportal], click **More Services**, then click **App Service**
+- [] On the **App Service** blade, click **appsvctestapp**
+- [] On the Web App blade, click **Browse** to view the default website for this app.
 
 > **Result:**
-> After completing this exercise, you have downloaded and extracted the App Service installer and helper scripts before you start installing App Service installation on Azure Stack Development Kit
-
----
-
-Click **Next** to advance to [**LAB 11 - Objectives and Summary**](#lab11) window
+> After completing this exercise, you have deployed a Web App to test drive.
 
 ---
 
