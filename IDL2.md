@@ -491,12 +491,12 @@ $ArmEndpoint =  "https://adminmanagement.local.azurestack.external"
 $KeyvaultDnsSuffix = “adminvault.local.azurestack.external” 
   
 # Register an AzureRM environment that targets your Azure Stack instance 
-Add-AzureRMEnvironment ` 
-  -Name "AzureStackAdmin" ` 
+Add-AzureRMEnvironment `
+  -Name "AzureStackAdmin" `
   -ArmEndpoint $ArmEndpoint 
   
-Set-AzureRmEnvironment ` 
-  -Name "AzureStackAdmin" ` 
+Set-AzureRmEnvironment `
+  -Name "AzureStackAdmin" `
   -GraphAudience $GraphAudience  
   
 # Get the Active Directory tenantId that is used to deploy Azure Stack 
@@ -505,9 +505,9 @@ $TenantID = Get-AzsDirectoryTenantId `
   -EnvironmentName "AzureStackAdmin" 
   
 # Sign in to your environment 
-Login-AzureRmAccount ` 
-  -EnvironmentName "AzureStackAdmin" ` 
-  -TenantId $TenantID ` 
+Login-AzureRmAccount `
+  -EnvironmentName "AzureStackAdmin" `
+  -TenantId $TenantID `
   -Credential $AadAdminCred
 ```
 ##Task 4: Test Azure Stack PowerShell
@@ -2186,11 +2186,11 @@ Click **Next** to advance to [**LAB 08 - Exercise 1**](#lab08e1) window
 - [] In the [Azure Stack Admin Portal][azurestack-adminportal], click **Dashboard**
 - [] In the Dashboard click **local** in **Region management** list
 
-!IMAGE[image8_1.jpg](image8_1.jpg)
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab08-e1-i1.png)
 
 > [!KNOWLEDGE] The Region management tile, pinned by default in the administrator portal for the Default Provider Subscription, lists all the deployed regions of Azure Stack. The tile shows the number of active critical and warning alerts for each region and is your entry point into the health and alert functionality of Azure Stack.
 
-!IMAGE[image8_2.jpg](image8_2.jpg)
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab08-e1-i2.png)
 
 - [] On the **local** blade, click **Resource providers**, then click **Storage** to view more detailed information.
 
@@ -2208,11 +2208,12 @@ Click **Next** to advance to [**LAB 08 - Exercise 1**](#lab08e1) window
 
 > [!KNOWLEDGE] The list of active alerts for each Azure Stack region is available directly from the Region management blade. The first tile in the default configuration is the Alerts tile, which displays a summary of the critical and warning alerts for the region.
 
-!IMAGE[image8_3.jpg](image8_3.jpg)
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab08-e1-i3.png)
+
 
 - [] Click on top part of the Alerts tile to view list of all active alerts.
 
-!IMAGE[image8_4.jpg](image8_4.jpg)
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab08-e1-i4.png)
 
 > [!KNOWLEDGE] By selecting the top part of the Alerts tile, you navigate to the list of all active alerts for the region. If you select either the Critical or Warning line item within the tile, you navigate to a filtered list of alerts (Critical or Warning).
 
@@ -2229,7 +2230,7 @@ Click **Next** to advance to [**LAB 08 - Exercise 1**](#lab08e1) window
 - [] From the list of Resource Providers, select **Network**.
 - [] The **Network** blade displays the **Public IP pools usage** tile in the **Overview** section.
 
-!IMAGE[image8_5.jpg](image8_5.jpg)
+!IMAGE[Lab Image](https://raw.githubusercontent.com/yagmurs/Wplus-AzS/master/screens/lab08-e1-i5.png)
 
 ##Task 4: Find a storage account
 > In this task, you will:
@@ -2298,7 +2299,6 @@ $cred = Get-Credential
 Test-AzureStack
 ```
 > [!KNOWLEDGE] If any tests report fail, run: Get-AzureStackLog -FilterByRole "rolename" -OutputPath "Log output path". The cmdlet gathers the logs from Test-AzureStack
-!IMAGE[5px64167.jpg](5px64167.jpg)
 
 
 > **Result:**
@@ -2810,7 +2810,7 @@ Click **Next** to advance to [**LAB 10 - Exercise 2**](#lab10e2) window
 > - Download and extract the App Service on Azure Stack deployment helper scripts.
 > - Download the App Service on Azure Stack installer.
 
-##Task 1: 
+##Task 1: Download App Service helper scripts
 > In this task, you will you will act as a cloud operator and:
 > - Download and extract the App Service on Azure Stack deployment helper scripts.
 
@@ -2825,7 +2825,7 @@ Invoke-WebRequest -Uri "https://aka.ms/appsvconmashelpers" -OutFile "$defaultLoc
 Expand-Archive -Path "$defaultLocalPath\AppServiceHelperScripts.zip" -DestinationPath "$defaultLocalPath\AppServiceHelperScripts"
 ```
 
-##Task 2: 
+##Task 2: Download App service installer
 > In this task, you will you will act as a cloud operator and:
 > - Download the App Service on Azure Stack installer.
 
